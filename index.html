@@ -1,8 +1,6 @@
 
-
-
 HTML icon
-index-v7
+index-v8
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -213,14 +211,6 @@ index-v7
   .pill[data-tab="tomorrow"].active { background: var(--amber); border-color: var(--amber); }
   .pill[data-tab="next3"].active { background: var(--blue); border-color: var(--blue); }
   .pill[data-tab="overdue"].active { background: var(--purple); border-color: var(--purple); }
-
-  .view-hint {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-bottom: 10px;
-    font-weight: 600;
-    overflow-wrap: anywhere;
-  }
 
   /* Group Container */
   .group-card {
@@ -519,8 +509,6 @@ index-v7
   </button>
 </div>
 
-<div class="view-hint" id="viewHint"></div>
-
 <!-- 4. EXPERIMENT LIST -->
 <div id="contentArea"></div>
 
@@ -631,10 +619,17 @@ function getTabItems(withDiff, tab) {
   return withDiff;
 }
 
-// Sort Taluks: Overdue first (diff < 0), then Today (0), Tomorrow (1), +2d, +3d, Future, No Date
-function getTalukSortRank(grp) {
-  const diffs = grp.map(x => x.diff).filter(d => d !== null);
-  return diffs.length ? Math.min(...diffs) : 99999;
+// Sort Taluks by earliest upcoming alert date: Today (0) -> Tomorrow (1) -> 2 days -> 3 days -> Future -> Overdue
+function getTalukSortRank(grp, tab) {
+  if (tab === 'overdue') {
+    const diffs = grp.map(x => x.diff).filter(d => d !== null);
+    return diffs.length ? Math.min(...diffs) : 99999;
+  }
+  const upcomingDiffs = grp.map(x => x.diff).filter(d => d !== null && d >= 0);
+  if (upcomingDiffs.length > 0) return Math.min(...upcomingDiffs);
+  const pastDiffs = grp.map(x => x.diff).filter(d => d !== null && d < 0);
+  if (pastDiffs.length > 0) return 10000 + Math.abs(Math.max(...pastDiffs));
+  return 99999;
 }
 
 function render() {
@@ -654,15 +649,6 @@ function render() {
   document.getElementById('cnt-overdue').textContent = listOverdue.length;
   document.getElementById('cnt-all').textContent = withDiff.length;
 
-  const hints = {
-    today: `Harvests scheduled for Today (${addDaysDisp(TODAY_ISO, 0)})`,
-    tomorrow: `Harvests scheduled for Tomorrow (${addDaysDisp(TODAY_ISO, 1)})`,
-    next3: `Harvests for Next 3 Days leaving today (${addDaysDisp(TODAY_ISO, 1)} to ${addDaysDisp(TODAY_ISO, 3)})`,
-    overdue: `Past harvest dates before ${addDaysDisp(TODAY_ISO, 0)}`,
-    all: `All pending supervision (${withDiff.length}) — Sorted Overdue first, then Today, Tomorrow & upcoming`
-  };
-  document.getElementById('viewHint').textContent = hints[activeTab];
-
   const items = getTabItems(withDiff, activeTab);
   const area = document.getElementById('contentArea');
 
@@ -681,10 +667,10 @@ function render() {
     grouped[key].push(item);
   });
 
-  // Sort Taluks: Overdue first, then Today -> Tomorrow -> +2d -> +3d -> Future
+  // Sort Taluk keys by earliest upcoming alert date (Today -> Tomorrow -> +2d -> +3d -> Future -> Overdue)
   const sortedTaluks = Object.keys(grouped).sort((a, b) => {
-    const rankA = getTalukSortRank(grouped[a]);
-    const rankB = getTalukSortRank(grouped[b]);
+    const rankA = getTalukSortRank(grouped[a], activeTab);
+    const rankB = getTalukSortRank(grouped[b], activeTab);
     if (rankA !== rankB) return rankA - rankB;
     return a.localeCompare(b);
   });
@@ -692,8 +678,16 @@ function render() {
   let html = '';
   sortedTaluks.forEach(tlk => {
     const grp = grouped[tlk];
-    // Within each taluk: Overdue first, then Today, Tomorrow, +2d, +3d...
-    grp.sort((a, b) => (a.diff ?? 99999) - (b.diff ?? 99999) || a.id - b.id);
+    // Within each taluk: Today -> Tomorrow -> +2d -> +3d -> Future -> Overdue (unless in overdue tab)
+    if (activeTab === 'all') {
+      grp.sort((a, b) => {
+        const aRank = (a.diff !== null && a.diff >= 0) ? a.diff : (10000 + Math.abs(a.diff ?? 9999));
+        const bRank = (b.diff !== null && b.diff >= 0) ? b.diff : (10000 + Math.abs(b.diff ?? 9999));
+        return aRank - bRank || a.id - b.id;
+      });
+    } else {
+      grp.sort((a, b) => (a.diff ?? 99999) - (b.diff ?? 99999) || a.id - b.id);
+    }
 
     const supCounts = {};
     grp.forEach(x => supCounts[x.sup] = (supCounts[x.sup] || 0) + 1);
@@ -777,7 +771,11 @@ function render() {
 
 function exportCSV() {
   const base = getBaseFiltered().map(d => ({...d, diff: daysDiffFromToday(d.date)}));
-  base.sort((a, b) => (a.diff ?? 99999) - (b.diff ?? 99999) || a.taluk.localeCompare(b.taluk) || a.id - b.id);
+  base.sort((a, b) => {
+    const aRank = (activeTab === 'overdue') ? (a.diff ?? 99999) : ((a.diff !== null && a.diff >= 0) ? a.diff : (10000 + Math.abs(a.diff ?? 9999)));
+    const bRank = (activeTab === 'overdue') ? (b.diff ?? 99999) : ((b.diff !== null && b.diff >= 0) ? b.diff : (10000 + Math.abs(b.diff ?? 9999)));
+    return aRank - bRank || a.taluk.localeCompare(b.taluk) || a.id - b.id;
+  });
   const rows = getTabItems(base, activeTab);
   if (rows.length === 0) { showToast('No rows to export.'); return; }
   const headers = ['Taluk','Taluk SI Mobile','Supervisor','Experiment ID','Harvest Date','Hobli/GP','Village','Crop','Survey No','PW Name','PW Phone','Department','Designation'];
