@@ -1,4 +1,8 @@
 
+
+
+HTML icon
+index-v6
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +62,7 @@
     white-space: nowrap;
   }
 
-  /* Upload Bar (First Reference Point) */
+  /* Upload Bar */
   .upload-card {
     background: var(--surface);
     border: 1.5px dashed var(--navy);
@@ -72,13 +76,14 @@
     gap: 8px;
   }
   .upload-info h2 {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--navy);
     font-weight: 700;
   }
   .upload-info p {
     font-size: 0.78rem;
     color: var(--muted);
+    margin-top: 2px;
   }
   .upload-btn {
     display: inline-flex;
@@ -176,8 +181,8 @@
     color: #fff;
   }
   .pill[data-tab="today"].active { background: var(--red); border-color: var(--red); }
-  .pill[data-tab="next3"].active { background: var(--amber); border-color: var(--amber); }
-  .pill[data-tab="next7"].active { background: var(--blue); border-color: var(--blue); }
+  .pill[data-tab="tomorrow"].active { background: var(--amber); border-color: var(--amber); }
+  .pill[data-tab="next3"].active { background: var(--blue); border-color: var(--blue); }
   .pill[data-tab="overdue"].active { background: var(--purple); border-color: var(--purple); }
 
   .view-hint {
@@ -372,13 +377,13 @@
   <span class="today-pill" id="todayBadge"></span>
 </header>
 
-<!-- 1. UPLOAD PENDING FORM 2 EXCEL FIRST -->
+<!-- 1. UPLOAD LATEST FORM 2 PENDING LIST -->
 <section class="upload-card no-print">
   <div class="upload-info">
-    <h2>Pending Form 2 Excel (Reference)</h2>
-    <p id="dataSourceLabel">Preloaded: 321 Pending · 115 Completed (As on 24/11/2026)</p>
+    <h2>Upload latest Form 2 pending list</h2>
+    <p id="dataSourceLabel" style="display:none;"></p>
   </div>
-  <label for="excelUpload" class="upload-btn">Upload Fresh Excel</label>
+  <label for="excelUpload" class="upload-btn">Upload Excel (.xlsx)</label>
   <input type="file" id="excelUpload" accept=".xlsx,.xls" onchange="handleExcelUpload(event)">
 </section>
 
@@ -407,11 +412,11 @@
   <button class="pill active" data-tab="today" onclick="switchTab('today')">
     Today <span class="cnt" id="cnt-today">0</span>
   </button>
+  <button class="pill" data-tab="tomorrow" onclick="switchTab('tomorrow')">
+    Tomorrow <span class="cnt" id="cnt-tomorrow">0</span>
+  </button>
   <button class="pill" data-tab="next3" onclick="switchTab('next3')">
     Next 3 Days <span class="cnt" id="cnt-next3">0</span>
-  </button>
-  <button class="pill" data-tab="next7" onclick="switchTab('next7')">
-    Next 7 Days <span class="cnt" id="cnt-next7">0</span>
   </button>
   <button class="pill" data-tab="overdue" onclick="switchTab('overdue')">
     Overdue <span class="cnt" id="cnt-overdue">0</span>
@@ -488,8 +493,8 @@ function getBadge(diff) {
   if (diff === null) return '<span class="badge b-future">NO DATE</span>';
   if (diff === 0) return '<span class="badge b-today">TODAY</span>';
   if (diff === 1) return '<span class="badge b-tomorrow">TOMORROW</span>';
-  if (diff >= 2 && diff <= 7) return `<span class="badge b-upcoming">IN ${diff} DAYS</span>`;
-  if (diff > 7) return `<span class="badge b-future">IN ${diff}d</span>`;
+  if (diff >= 2 && diff <= 3) return `<span class="badge b-upcoming">IN ${diff} DAYS</span>`;
+  if (diff > 3) return `<span class="badge b-future">IN ${diff}d</span>`;
   return `<span class="badge b-overdue">${Math.abs(diff)}d OVERDUE</span>`;
 }
 
@@ -508,10 +513,23 @@ function getBaseFiltered() {
 
 function getTabItems(withDiff, tab) {
   if (tab === 'today') return withDiff.filter(x => x.diff === 0);
+  if (tab === 'tomorrow') return withDiff.filter(x => x.diff === 1);
   if (tab === 'next3') return withDiff.filter(x => x.diff !== null && x.diff >= 1 && x.diff <= 3);
-  if (tab === 'next7') return withDiff.filter(x => x.diff !== null && x.diff >= 1 && x.diff <= 7);
   if (tab === 'overdue') return withDiff.filter(x => x.diff !== null && x.diff < 0);
   return withDiff;
+}
+
+// Sort Taluks by earliest pending alert date: Today (0) -> Tomorrow (1) -> 2 days -> 3 days -> Future -> Overdue
+function getTalukSortRank(grp, tab) {
+  if (tab === 'overdue') {
+    const diffs = grp.map(x => x.diff).filter(d => d !== null);
+    return diffs.length ? Math.min(...diffs) : 99999;
+  }
+  const upcomingDiffs = grp.map(x => x.diff).filter(d => d !== null && d >= 0);
+  if (upcomingDiffs.length > 0) return Math.min(...upcomingDiffs);
+  const pastDiffs = grp.map(x => x.diff).filter(d => d !== null && d < 0);
+  if (pastDiffs.length > 0) return 10000 + Math.abs(Math.max(...pastDiffs));
+  return 99999;
 }
 
 function render() {
@@ -520,22 +538,22 @@ function render() {
   withDiff.sort((a, b) => (a.diff ?? 9999) - (b.diff ?? 9999) || a.taluk.localeCompare(b.taluk) || a.id - b.id);
 
   const listToday = getTabItems(withDiff, 'today');
+  const listTomorrow = getTabItems(withDiff, 'tomorrow');
   const listNext3 = getTabItems(withDiff, 'next3');
-  const listNext7 = getTabItems(withDiff, 'next7');
   const listOverdue = getTabItems(withDiff, 'overdue');
 
   document.getElementById('cnt-today').textContent = listToday.length;
+  document.getElementById('cnt-tomorrow').textContent = listTomorrow.length;
   document.getElementById('cnt-next3').textContent = listNext3.length;
-  document.getElementById('cnt-next7').textContent = listNext7.length;
   document.getElementById('cnt-overdue').textContent = listOverdue.length;
   document.getElementById('cnt-all').textContent = withDiff.length;
 
   const hints = {
-    today: `Showing harvests scheduled for Today (${addDaysDisp(TODAY_ISO, 0)})`,
-    next3: `Showing harvests for Next 3 Days leaving today (${addDaysDisp(TODAY_ISO, 1)} to ${addDaysDisp(TODAY_ISO, 3)})`,
-    next7: `Showing harvests for Next 7 Days leaving today (${addDaysDisp(TODAY_ISO, 1)} to ${addDaysDisp(TODAY_ISO, 7)})`,
-    overdue: `Showing past harvest dates before ${addDaysDisp(TODAY_ISO, 0)}`,
-    all: `Showing all pending supervision experiments (${withDiff.length})`
+    today: `Harvests scheduled for Today (${addDaysDisp(TODAY_ISO, 0)})`,
+    tomorrow: `Harvests scheduled for Tomorrow (${addDaysDisp(TODAY_ISO, 1)})`,
+    next3: `Harvests for Next 3 Days leaving today (${addDaysDisp(TODAY_ISO, 1)} to ${addDaysDisp(TODAY_ISO, 3)})`,
+    overdue: `Past harvest dates before ${addDaysDisp(TODAY_ISO, 0)}`,
+    all: `All pending supervision experiments (${withDiff.length}) — Taluks ordered by nearest alert date`
   };
   document.getElementById('viewHint').textContent = hints[activeTab];
 
@@ -557,9 +575,25 @@ function render() {
     grouped[key].push(item);
   });
 
+  // Sort Taluk keys by earliest alert date (Today -> Tomorrow -> +2d -> +3d -> ...)
+  const sortedTaluks = Object.keys(grouped).sort((a, b) => {
+    const rankA = getTalukSortRank(grouped[a], activeTab);
+    const rankB = getTalukSortRank(grouped[b], activeTab);
+    if (rankA !== rankB) return rankA - rankB;
+    return a.localeCompare(b);
+  });
+
   let html = '';
-  Object.keys(grouped).sort().forEach(tlk => {
+  sortedTaluks.forEach(tlk => {
     const grp = grouped[tlk];
+    // Within each taluk, put upcoming (Today, Tomorrow, +2d...) before past overdue when in "all" tab
+    if (activeTab === 'all') {
+      grp.sort((a, b) => {
+        const aRank = (a.diff !== null && a.diff >= 0) ? a.diff : (10000 + Math.abs(a.diff ?? 9999));
+        const bRank = (b.diff !== null && b.diff >= 0) ? b.diff : (10000 + Math.abs(b.diff ?? 9999));
+        return aRank - bRank || a.id - b.id;
+      });
+    }
     const supCounts = {};
     grp.forEach(x => supCounts[x.sup] = (supCounts[x.sup] || 0) + 1);
     const sub = Object.entries(supCounts).map(([k, v]) => `${k}: ${v}`).join(' · ');
@@ -721,9 +755,9 @@ function handleExcelUpload(e) {
         }
       }
       DATA = Array.from(mapMatched.values());
-      const completedCount = Object.keys(SUPERVISION_MAP).length - DATA.length;
-      document.getElementById('dataSourceLabel').textContent =
-        `Loaded ${file.name}: ${DATA.length} Pending · ${completedCount} Completed (of 436)`;
+      const lbl = document.getElementById('dataSourceLabel');
+      lbl.textContent = `Loaded: ${file.name} (${DATA.length} Pending)`;
+      lbl.style.display = 'block';
       populateTaluks();
       render();
       showToast(`Updated: ${DATA.length} pending experiments matched.`);
