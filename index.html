@@ -1,5 +1,6 @@
-n
-index-v8
+
+HTML icon
+index-v9
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,6 +168,14 @@ index-v8
   }
 
   /* Alert Pills (Wrapped cleanly so zero screen overflow) */
+  .pills-label {
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
   .pills {
     display: flex;
     flex-wrap: wrap;
@@ -490,6 +499,7 @@ index-v8
 </div>
 
 <!-- 3. ALERT PILLS -->
+<div class="pills-label no-print">Harvesting</div>
 <div class="pills no-print">
   <button class="pill active" data-tab="today" onclick="switchTab('today')">
     Today <span class="cnt" id="cnt-today">0</span>
