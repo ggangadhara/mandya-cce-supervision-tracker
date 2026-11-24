@@ -21,8 +21,6 @@
     --blue-bg: #eff6ff;
     --purple: #6b21a8;
     --purple-bg: #f3e8ff;
-    --green: #15803d;
-    --green-bg: #f0fdf4;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -41,13 +39,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     padding-bottom: 10px;
     margin-bottom: 12px;
     border-bottom: 2px solid var(--navy);
     flex-wrap: wrap;
   }
-  header h1 { font-size: 1.18rem; color: var(--navy); font-weight: 800; }
+  header h1 { font-size: 1.15rem; color: var(--navy); font-weight: 800; }
   .today-pill {
     font-size: 0.78rem;
     font-weight: 700;
@@ -59,134 +57,133 @@
     white-space: nowrap;
   }
 
-  /* 1. Upload Card (First / Primary Reference Point) */
+  /* Upload Bar (First Reference Point) */
   .upload-card {
     background: var(--surface);
     border: 1.5px dashed var(--navy);
     border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 14px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 8px;
   }
   .upload-info h2 {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
     color: var(--navy);
     font-weight: 700;
-    margin-bottom: 2px;
   }
   .upload-info p {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--muted);
   }
   .upload-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
     background: var(--navy);
     color: #fff;
-    font-size: 0.86rem;
+    font-size: 0.84rem;
     font-weight: 700;
-    padding: 10px 16px;
+    padding: 9px 14px;
     border-radius: 8px;
     cursor: pointer;
-    min-height: 42px;
+    min-height: 40px;
     white-space: nowrap;
   }
   .upload-btn:active { opacity: 0.85; }
   #excelUpload { display: none; }
 
-  /* 2. Compact KPI Strip (2x2 on mobile, 4-col on desktop) */
-  .kpi-grid {
+  /* Supervisor Selection (First) + Taluk Filter */
+  .selector-bar {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin-bottom: 14px;
-  }
-  @media (min-width: 640px) {
-    .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  }
-  .kpi {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    background: #fff;
-  }
-  .kpi .lbl { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
-  .kpi .val { font-size: 1.45rem; font-weight: 800; margin-top: 2px; line-height: 1.1; }
-  .kpi.today { border-left: 4px solid var(--red); }
-  .kpi.today .val { color: var(--red); }
-  .kpi.tomorrow { border-left: 4px solid var(--amber); }
-  .kpi.tomorrow .val { color: var(--amber); }
-  .kpi.window { border-left: 4px solid var(--blue); }
-  .kpi.window .val { color: var(--blue); }
-  .kpi.overdue { border-left: 4px solid var(--purple); }
-  .kpi.overdue .val { color: var(--purple); }
-
-  /* 3. Navigation Tabs (Touch-friendly scrollable pills on mobile) */
-  .tabs {
-    display: flex;
-    gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 4px;
     margin-bottom: 12px;
-    scrollbar-width: none;
   }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab {
-    flex: 0 0 auto;
-    padding: 9px 14px;
-    font-size: 0.84rem;
-    font-weight: 700;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: #fff;
-    color: var(--muted);
-    min-height: 38px;
-    white-space: nowrap;
+  .sel-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
-  .tab.active {
-    background: var(--navy);
-    color: #fff;
-    border-color: var(--navy);
-  }
-
-  /* 4. Compact Filters */
-  .filters {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 14px;
-  }
-  @media (min-width: 768px) {
-    .filters { grid-template-columns: repeat(4, 1fr); }
-  }
-  .f-group { display: flex; flex-direction: column; gap: 3px; }
-  .f-group label {
-    font-size: 0.7rem;
+  .sel-group label {
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
-  select, input[type="date"] {
+  select {
     width: 100%;
-    padding: 8px 10px;
-    min-height: 38px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-size: 0.86rem;
+    padding: 9px 10px;
+    min-height: 42px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
     background: #fff;
     color: var(--text);
+  }
+  select:focus {
+    outline: none;
+    border-color: var(--navy);
+  }
+
+  /* Alert Pills */
+  .pills {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .pills::-webkit-scrollbar { display: none; }
+  .pill {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font-size: 0.83rem;
+    font-weight: 700;
+    cursor: pointer;
+    min-height: 40px;
+    white-space: nowrap;
+  }
+  .pill .cnt {
+    background: var(--surface);
+    color: var(--navy);
+    padding: 1px 7px;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 800;
+  }
+  .pill.active {
+    background: var(--navy);
+    color: #fff;
+    border-color: var(--navy);
+  }
+  .pill.active .cnt {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+  }
+  .pill[data-tab="today"].active { background: var(--red); border-color: var(--red); }
+  .pill[data-tab="next3"].active { background: var(--amber); border-color: var(--amber); }
+  .pill[data-tab="next7"].active { background: var(--blue); border-color: var(--blue); }
+  .pill[data-tab="overdue"].active { background: var(--purple); border-color: var(--purple); }
+
+  .view-hint {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 600;
   }
 
   /* Group Container */
@@ -204,23 +201,20 @@
     flex-wrap: wrap;
     gap: 6px;
     background: var(--surface);
-    padding: 10px 12px;
+    padding: 9px 12px;
     border-bottom: 1px solid var(--border);
   }
-  .group-hdr h3 { font-size: 0.98rem; color: var(--navy); font-weight: 800; }
+  .group-hdr h3 { font-size: 0.96rem; color: var(--navy); font-weight: 800; }
   .group-sub { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
 
-  /* Mobile Card List (default < 768px) */
-  .mobile-list {
-    display: flex;
-    flex-direction: column;
-  }
+  /* Mobile Card List (< 768px) */
+  .mobile-list { display: flex; flex-direction: column; }
   .exp-item {
     padding: 11px 12px;
     border-bottom: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
   }
   .exp-item:last-child { border-bottom: none; }
   .exp-top {
@@ -237,16 +231,10 @@
     flex-wrap: wrap;
   }
   .exp-date { font-size: 0.86rem; font-weight: 800; color: var(--text); }
-  .exp-id { font-size: 0.82rem; font-weight: 700; color: var(--muted); }
-  .exp-mid {
-    font-size: 0.86rem;
-    color: var(--text);
-  }
+  .exp-id { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+  .exp-mid { font-size: 0.87rem; color: var(--text); }
   .exp-mid strong { color: var(--navy); }
-  .exp-meta {
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
+  .exp-meta { font-size: 0.78rem; color: var(--muted); }
   .exp-bottom {
     display: flex;
     justify-content: space-between;
@@ -258,7 +246,6 @@
   .call-btn {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
     padding: 6px 11px;
     border-radius: 6px;
     background: var(--blue-bg);
@@ -304,23 +291,20 @@
     border-radius: 999px;
     font-size: 0.7rem;
     font-weight: 800;
-    letter-spacing: 0.02em;
   }
   .b-today { background: var(--red-bg); color: var(--red); border: 1px solid #fecaca; }
   .b-tomorrow { background: var(--amber-bg); color: var(--amber); border: 1px solid #fde68a; }
-  .b-day3 { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
+  .b-upcoming { background: var(--blue-bg); color: var(--blue); border: 1px solid #bfdbfe; }
   .b-future { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
   .b-overdue { background: var(--purple-bg); color: var(--purple); border: 1px solid #e9d5ff; }
   .b-sup { background: #e2e8f0; color: #0f172a; border-radius: 4px; }
 
-  /* Footer utility actions */
-  .footer-bar {
+  /* Actions & Footer */
+  .actions-bar {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
     margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
     flex-wrap: wrap;
   }
   .btn-sec {
@@ -335,6 +319,16 @@
     min-height: 38px;
   }
   .btn-sec:hover { border-color: var(--navy); }
+
+  footer {
+    margin-top: 20px;
+    padding: 12px 8px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
 
   .empty {
     text-align: center;
@@ -362,7 +356,7 @@
   }
 
   @media print {
-    .upload-card, .tabs, .filters, .footer-bar, .no-print { display: none !important; }
+    .upload-card, .selector-bar, .pills, .actions-bar, .no-print { display: none !important; }
     .mobile-list { display: none !important; }
     .desktop-table { display: block !important; }
     body { padding: 0; }
@@ -377,73 +371,77 @@
   <span class="today-pill" id="todayBadge"></span>
 </header>
 
-<!-- STEP 1: UPLOAD FRESH PENDING FORM 2 EXCEL FIRST -->
+<!-- 1. UPLOAD PENDING FORM 2 EXCEL FIRST -->
 <section class="upload-card no-print">
   <div class="upload-info">
-    <h2>1. Pending Form 2 Excel (Reference File)</h2>
+    <h2>Pending Form 2 Excel (Reference)</h2>
     <p id="dataSourceLabel">Preloaded: 321 Pending · 115 Completed (As on 24/11/2026)</p>
   </div>
-  <label for="excelUpload" class="upload-btn">Upload Fresh Excel (.xlsx)</label>
+  <label for="excelUpload" class="upload-btn">Upload Fresh Excel</label>
   <input type="file" id="excelUpload" accept=".xlsx,.xls" onchange="handleExcelUpload(event)">
 </section>
 
-<!-- KPI SUMMARY -->
-<div class="kpi-grid" id="kpiGrid"></div>
-
-<!-- TABS -->
-<div class="tabs no-print">
-  <button class="tab active" id="tab-upcoming" onclick="switchTab('upcoming')">Upcoming Alerts</button>
-  <button class="tab" id="tab-supervisor" onclick="switchTab('supervisor')">Supervisor-wise</button>
-  <button class="tab" id="tab-overdue" onclick="switchTab('overdue')">Overdue</button>
-  <button class="tab" id="tab-all" onclick="switchTab('all')">All Pending</button>
-</div>
-
-<!-- COMPACT FILTERS -->
-<div class="filters no-print">
-  <div class="f-group">
-    <label>Taluk</label>
-    <select id="filterTaluk" onchange="render()"><option value="ALL">All Taluks</option></select>
-  </div>
-  <div class="f-group">
-    <label>Supervisor</label>
+<!-- 2. SUPERVISOR SELECTION FIRST (PLUS TALUK FILTER) -->
+<div class="selector-bar no-print">
+  <div class="sel-group">
+    <label for="filterSup">Supervisor</label>
     <select id="filterSup" onchange="render()">
-      <option value="ALL">All Supervisors</option>
+      <option value="ALL">All (DSO / AD / SI / ASO)</option>
       <option value="DSO">DSO</option>
       <option value="AD">AD</option>
       <option value="SI">SI</option>
       <option value="ASO">ASO</option>
     </select>
   </div>
-  <div class="f-group" id="windowGroup">
-    <label>Alert Window</label>
-    <select id="windowDays" onchange="render()">
-      <option value="3" selected>Next 3 Days</option>
-      <option value="5">Next 5 Days</option>
-      <option value="7">Next 7 Days</option>
+  <div class="sel-group">
+    <label for="filterTaluk">Taluk</label>
+    <select id="filterTaluk" onchange="render()">
+      <option value="ALL">All Taluks</option>
     </select>
   </div>
-  <div class="f-group">
-    <label>Date (Today Onwards)</label>
-    <input type="date" id="refDate" onchange="onDateChange()">
-  </div>
 </div>
 
-<!-- CONTENT -->
+<!-- 3. ALERT PILLS -->
+<div class="pills no-print">
+  <button class="pill active" data-tab="today" onclick="switchTab('today')">
+    Today <span class="cnt" id="cnt-today">0</span>
+  </button>
+  <button class="pill" data-tab="next3" onclick="switchTab('next3')">
+    Next 3 Days <span class="cnt" id="cnt-next3">0</span>
+  </button>
+  <button class="pill" data-tab="next7" onclick="switchTab('next7')">
+    Next 7 Days <span class="cnt" id="cnt-next7">0</span>
+  </button>
+  <button class="pill" data-tab="overdue" onclick="switchTab('overdue')">
+    Overdue <span class="cnt" id="cnt-overdue">0</span>
+  </button>
+  <button class="pill" data-tab="all" onclick="switchTab('all')">
+    All Pending <span class="cnt" id="cnt-all">0</span>
+  </button>
+</div>
+
+<div class="view-hint" id="viewHint"></div>
+
+<!-- 4. EXPERIMENT LIST -->
 <div id="contentArea"></div>
 
-<!-- SUBTLE FOOTER ACTIONS -->
-<div class="footer-bar no-print">
-  <button class="btn-sec" onclick="exportAlertCSV()">Export CSV</button>
+<div class="actions-bar no-print">
+  <button class="btn-sec" onclick="exportCSV()">Export CSV</button>
   <button class="btn-sec" onclick="window.print()">Print List</button>
 </div>
+
+<footer>
+  Designed and developed by Gangadhar, Statistical Inspector, Malavalli Taluk Office, Mandya
+</footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
 const SUPERVISION_MAP = {"6910059": "DSO", "6910060": "DSO", "6910083": "DSO", "6910107": "DSO", "6910845": "DSO", "6910846": "DSO", "6910943": "DSO", "6910985": "DSO", "6910986": "DSO", "6911205": "DSO", "6911206": "DSO", "6911381": "DSO", "6911382": "DSO", "6911451": "DSO", "6911452": "DSO", "6911463": "DSO", "6911464": "DSO", "6911913": "DSO", "6911914": "DSO", "6912311": "DSO", "6912312": "DSO", "6912397": "DSO", "6912398": "DSO", "6922513": "DSO", "6922514": "DSO", "6922515": "DSO", "6922516": "DSO", "6944387": "DSO", "6944388": "DSO", "6944545": "DSO", "6944546": "DSO", "6944701": "DSO", "6944702": "DSO", "6944773": "DSO", "6944774": "DSO", "6945093": "DSO", "6945161": "DSO", "6945162": "DSO", "6910161": "AD", "6910241": "AD", "6911023": "AD", "6911024": "AD", "6911063": "AD", "6911064": "AD", "6911167": "AD", "6911168": "AD", "6911255": "AD", "6911256": "AD", "6911371": "AD", "6911372": "AD", "6911947": "AD", "6911948": "AD", "6912357": "AD", "6912358": "AD", "6922529": "AD", "6922530": "AD", "6922531": "AD", "6922532": "AD", "6944415": "AD", "6944416": "AD", "6944615": "AD", "6944616": "AD", "6944633": "AD", "6944634": "AD", "6944751": "AD", "6944752": "AD", "6944963": "AD", "6944964": "AD", "6910047": "SI", "6910055": "SI", "6910056": "SI", "6910066": "SI", "6910078": "SI", "6910079": "SI", "6910087": "SI", "6910119": "SI", "6910137": "SI", "6910149": "SI", "6910157": "SI", "6910163": "SI", "6910167": "SI", "6910171": "SI", "6910175": "SI", "6910179": "SI", "6910193": "SI", "6910203": "SI", "6910209": "SI", "6910213": "SI", "6910221": "SI", "6910233": "SI", "6910239": "SI", "6910247": "SI", "6910255": "SI", "6910273": "SI", "6910281": "SI", "6910291": "SI", "6910303": "SI", "6910305": "SI", "6910315": "SI", "6910329": "SI", "6910339": "SI", "6910352": "SI", "6910357": "SI", "6910365": "SI", "6910375": "SI", "6910821": "SI", "6910822": "SI", "6910835": "SI", "6910836": "SI", "6910837": "SI", "6910838": "SI", "6910853": "SI", "6910854": "SI", "6910857": "SI", "6910858": "SI", "6910881": "SI", "6910882": "SI", "6910921": "SI", "6910922": "SI", "6910979": "SI", "6910980": "SI", "6911011": "SI", "6911012": "SI", "6911051": "SI", "6911052": "SI", "6911085": "SI", "6911086": "SI", "6911091": "SI", "6911092": "SI", "6911107": "SI", "6911108": "SI", "6911121": "SI", "6911122": "SI", "6911123": "SI", "6911124": "SI", "6911185": "SI", "6911186": "SI", "6911193": "SI", "6911194": "SI", "6911201": "SI", "6911202": "SI", "6911203": "SI", "6911204": "SI", "6911231": "SI", "6911232": "SI", "6911233": "SI", "6911234": "SI", "6911257": "SI", "6911258": "SI", "6911269": "SI", "6911270": "SI", "6911361": "SI", "6911362": "SI", "6911391": "SI", "6911392": "SI", "6911399": "SI", "6911400": "SI", "6911441": "SI", "6911442": "SI", "6911455": "SI", "6911456": "SI", "6911561": "SI", "6911562": "SI", "6911577": "SI", "6911578": "SI", "6911593": "SI", "6911594": "SI", "6911893": "SI", "6911894": "SI", "6911981": "SI", "6911982": "SI", "6911983": "SI", "6911984": "SI", "6911985": "SI", "6911986": "SI", "6911987": "SI", "6911988": "SI", "6912009": "SI", "6912010": "SI", "6912027": "SI", "6912028": "SI", "6912035": "SI", "6912036": "SI", "6912077": "SI", "6912078": "SI", "6912095": "SI", "6912096": "SI", "6912107": "SI", "6912108": "SI", "6912117": "SI", "6912118": "SI", "6912154": "SI", "6912155": "SI", "6912165": "SI", "6912166": "SI", "6912173": "SI", "6912174": "SI", "6912187": "SI", "6912188": "SI", "6912197": "SI", "6912198": "SI", "6912225": "SI", "6912226": "SI", "6912235": "SI", "6912236": "SI", "6912243": "SI", "6912244": "SI", "6912259": "SI", "6912260": "SI", "6912267": "SI", "6912268": "SI", "6912277": "SI", "6912278": "SI", "6912347": "SI", "6912348": "SI", "6912367": "SI", "6912368": "SI", "6912421": "SI", "6912422": "SI", "6912437": "SI", "6912438": "SI", "6912441": "SI", "6912442": "SI", "6922469": "SI", "6922470": "SI", "6922471": "SI", "6922472": "SI", "6922477": "SI", "6922478": "SI", "6922479": "SI", "6922480": "SI", "6922481": "SI", "6922482": "SI", "6922483": "SI", "6922484": "SI", "6922547": "SI", "6922548": "SI", "6922549": "SI", "6922550": "SI", "6922565": "SI", "6922566": "SI", "6922567": "SI", "6922568": "SI", "6922569": "SI", "6922570": "SI", "6922571": "SI", "6922572": "SI", "6922607": "SI", "6922608": "SI", "6944381": "SI", "6944382": "SI", "6944447": "SI", "6944448": "SI", "6944467": "SI", "6944468": "SI", "6944487": "SI", "6944488": "SI", "6944495": "SI", "6944496": "SI", "6944517": "SI", "6944518": "SI", "6944537": "SI", "6944538": "SI", "6944561": "SI", "6944562": "SI", "6944571": "SI", "6944572": "SI", "6944579": "SI", "6944580": "SI", "6944599": "SI", "6944600": "SI", "6944621": "SI", "6944622": "SI", "6944653": "SI", "6944654": "SI", "6944675": "SI", "6944676": "SI", "6944697": "SI", "6944698": "SI", "6944759": "SI", "6944760": "SI", "6944765": "SI", "6944766": "SI", "6944767": "SI", "6944768": "SI", "6944921": "SI", "6944922": "SI", "6945031": "SI", "6945032": "SI", "6945111": "SI", "6945112": "SI", "6945113": "SI", "6945114": "SI", "6945115": "SI", "6945116": "SI", "6945117": "SI", "6945118": "SI", "6945181": "SI", "6945221": "SI", "6945222": "SI", "6911211": "ASO", "6911212": "ASO", "6911223": "ASO", "6911224": "ASO", "6911267": "ASO", "6911268": "ASO", "6911315": "ASO", "6911316": "ASO", "6911359": "ASO", "6911360": "ASO", "6911377": "ASO", "6911378": "ASO", "6911379": "ASO", "6911380": "ASO", "6911389": "ASO", "6911390": "ASO", "6911401": "ASO", "6911402": "ASO", "6911409": "ASO", "6911410": "ASO", "6911419": "ASO", "6911420": "ASO", "6911429": "ASO", "6911430": "ASO", "6911491": "ASO", "6911492": "ASO", "6911529": "ASO", "6911530": "ASO", "6911573": "ASO", "6911574": "ASO", "6944803": "ASO", "6944817": "ASO", "6944821": "ASO", "6944829": "ASO", "6944830": "ASO", "6944843": "ASO", "6944845": "ASO", "6944850": "ASO", "6944856": "ASO", "6944869": "ASO", "6944870": "ASO", "6944872": "ASO", "6944874": "ASO", "6944882": "ASO", "6944889": "ASO", "6944893": "ASO", "6944899": "ASO", "6944900": "ASO", "6944905": "ASO", "6944910": "ASO", "6944915": "ASO", "6944916": "ASO", "6944923": "ASO", "6944924": "ASO", "6944926": "ASO", "6944929": "ASO", "6944930": "ASO", "6944931": "ASO", "6944932": "ASO", "6944934": "ASO", "6944935": "ASO", "6944937": "ASO", "6944938": "ASO", "6944939": "ASO", "6944940": "ASO", "6944945": "ASO", "6944948": "ASO", "6944953": "ASO", "6944954": "ASO", "6944955": "ASO", "6944956": "ASO", "6944957": "ASO", "6944958": "ASO", "6944959": "ASO", "6944960": "ASO", "6944965": "ASO", "6944966": "ASO", "6944967": "ASO", "6944968": "ASO", "6944969": "ASO", "6944970": "ASO", "6944971": "ASO", "6944972": "ASO", "6944977": "ASO", "6944978": "ASO", "6944979": "ASO", "6944980": "ASO", "6944983": "ASO", "6944984": "ASO", "6944985": "ASO", "6944986": "ASO", "6944987": "ASO", "6944988": "ASO", "6944989": "ASO", "6944990": "ASO", "6945015": "ASO", "6945030": "ASO", "6945039": "ASO", "6945047": "ASO", "6945048": "ASO", "6945053": "ASO", "6945054": "ASO", "6945057": "ASO", "6945058": "ASO", "6945061": "ASO", "6945064": "ASO", "6945066": "ASO", "6945067": "ASO", "6945068": "ASO", "6945071": "ASO", "6945072": "ASO", "6945075": "ASO", "6945076": "ASO", "6945077": "ASO", "6945078": "ASO", "6945079": "ASO", "6945080": "ASO", "6945083": "ASO", "6945084": "ASO", "6945085": "ASO", "6945086": "ASO", "6945087": "ASO", "6945088": "ASO", "6945089": "ASO", "6945090": "ASO", "6945119": "ASO", "6945120": "ASO", "6945132": "ASO", "6945163": "ASO", "6945164": "ASO", "6945171": "ASO", "6945199": "ASO", "6945200": "ASO", "6945201": "ASO", "6945217": "ASO", "6945218": "ASO"};
 let DATA = [{"sup": "DSO", "id": 6910059, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ತಾಳಶಾಸನ", "crop": "ಭತ್ತ", "syno": "142/*/*", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "Mahadev D", "phone": "8861612534", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6910060, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ತಾಳಶಾಸನ", "crop": "ಭತ್ತ", "syno": "145/*/*", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "Mahadev D", "phone": "8861612534", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6910083, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ1", "village": "ಚಿಕ್ಕಾಡೆ", "crop": "ಭತ್ತ", "syno": "99/*/5", "date": "2026-11-30", "date_disp": "30/11/2026", "pw": "SHIVARAJU T", "phone": "8970078013", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6910107, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ಮಹದೇಶ್ವರಪುರ", "crop": "ರಾಗಿ", "syno": "220/*/4", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "SOWMYA C", "phone": "8050595705", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6910943, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಚಾಮನಹಳ್ಳಿ / ದೇಶಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "260/*/4", "date": "2026-11-25", "date_disp": "25/11/2026", "pw": "MARALASIDDESH", "phone": "8884307393", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6911205, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ II", "village": "ಮಾಗನೂರು", "crop": "ಭತ್ತ", "syno": "234/*/5", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "Ramakrishna", "phone": "9916236833", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6911206, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ II", "village": "ಮಾಗನೂರು", "crop": "ಭತ್ತ", "syno": "63/*/3B", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "Ramakrishna", "phone": "9916236833", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6911381, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ರಾಗಿ", "syno": "213/*/5", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "mahadevi j", "phone": "9538908797", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6911382, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ರಾಗಿ", "syno": "213/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "mahadevi j", "phone": "9538908797", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6911913, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ತೆಂಡೆಕೆರೆ", "crop": "ಭತ್ತ", "syno": "76/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "K.S.KUMAR", "phone": "9242441407", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6911914, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ತೆಂಡೆಕೆರೆ", "crop": "ಭತ್ತ", "syno": "77/*/5", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "K.S.KUMAR", "phone": "9242441407", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "DSO", "id": 6912311, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಚಿಕ್ಕಗಾಡಿಗನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "130/*/*", "date": "2026-10-28", "date_disp": "28/10/2026", "pw": "HONNESH B", "phone": "9901922421", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6912312, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಚಿಕ್ಕಗಾಡಿಗನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "55/*/*", "date": "2026-10-28", "date_disp": "28/10/2026", "pw": "HONNESH B", "phone": "9901922421", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6912397, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಅಕ್ಕಿಹೆಬ್ಬಾಳ್", "village": "ಹಂಗರಮುದ್ದನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "27/*/28", "date": "2027-01-07", "date_disp": "07/01/2027", "pw": "RAGHAVENDRA", "phone": "8151873046", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6912398, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಅಕ್ಕಿಹೆಬ್ಬಾಳ್", "village": "ಹಂಗರಮುದ್ದನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "27/*/35", "date": "2027-01-08", "date_disp": "08/01/2027", "pw": "RAGHAVENDRA", "phone": "8151873046", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6922513, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ಅರಕೆರೆ", "crop": "ಭತ್ತ", "syno": "954/*/3", "date": "2026-11-25", "date_disp": "25/11/2026", "pw": "ಉಸ್ಮಾನ್‌ ಭಾಷ್‌", "phone": "8660443155", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6922514, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ಅರಕೆರೆ", "crop": "ಭತ್ತ", "syno": "955/*/*", "date": "2026-11-25", "date_disp": "25/11/2026", "pw": "ಉಸ್ಮಾನ್‌ ಭಾಷ್‌", "phone": "8660443155", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6922515, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ಅರಕೆರೆ", "crop": "ಭತ್ತ", "syno": "950/*/3", "date": "2026-11-25", "date_disp": "25/11/2026", "pw": "ಉಸ್ಮಾನ್‌ ಭಾಷ್‌", "phone": "8660443155", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6922516, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ಅರಕೆರೆ", "crop": "ಭತ್ತ", "syno": "950/*/6", "date": "2026-11-25", "date_disp": "25/11/2026", "pw": "ಉಸ್ಮಾನ್‌ ಭಾಷ್‌", "phone": "8660443155", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6944387, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬೆಳ್ಳೂರು", "village": "ಕಾಳಿಂಗನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "139/*/7", "date": "2026-12-24", "date_disp": "24/12/2026", "pw": "MARUTHESHA L", "phone": "9620870840", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6944388, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬೆಳ್ಳೂರು", "village": "ಕಾಳಿಂಗನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "139/*/8", "date": "2026-12-26", "date_disp": "26/12/2026", "pw": "MARUTHESHA L", "phone": "9620870840", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6944545, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಜಿ.ಬೊಮ್ಮನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "41/*/17", "date": "2027-01-08", "date_disp": "08/01/2027", "pw": "Ananda", "phone": "6363754175", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6944546, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಜಿ.ಬೊಮ್ಮನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "41/*/4", "date": "2027-01-08", "date_disp": "08/01/2027", "pw": "Ananda", "phone": "6363754175", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6944701, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬಿಂಡಿಗನವಿಲೆ", "village": "ಎ.ನಾಗತ್ತಿಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "105/*/2", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "ARCHANA REENA", "phone": "8722601688", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6944702, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬಿಂಡಿಗನವಿಲೆ", "village": "ಎ.ನಾಗತ್ತಿಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "105/*/9", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "ARCHANA REENA", "phone": "8722601688", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6945093, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 1", "village": "ದುದ್ದ", "crop": "ರಾಗಿ", "syno": "142/*/2", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "HARSHA", "phone": "9964243437", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "DSO", "id": 6945161, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಕಿರಗಂದೂರು", "crop": "ಕಬ್ಬು", "syno": "51/*/*", "date": "2027-01-16", "date_disp": "16/01/2027", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "DSO", "id": 6945162, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಕಿರಗಂದೂರು", "crop": "ಕಬ್ಬು", "syno": "52/*/3", "date": "2026-12-18", "date_disp": "18/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6910161, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಕಟ್ಟೇರಿ", "crop": "ಭತ್ತ", "syno": "6/*/*", "date": "2027-01-18", "date_disp": "18/01/2027", "pw": "D P KUMARA", "phone": "9900908772", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "AD", "id": 6910241, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ಚಿಕ್ಕಬ್ಯಾಡರಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "19/*/5", "date": "2027-01-20", "date_disp": "20/01/2027", "pw": "GOOLAPPA HORATTI", "phone": "9844394697", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911023, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಆಲೂರು", "crop": "ಹುರುಳಿ", "syno": "92/*/1A1", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "MANJULA", "phone": "8971442944", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911024, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಆಲೂರು", "crop": "ಹುರುಳಿ", "syno": "96/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "MANJULA", "phone": "8971442944", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911063, "taluk": "ಮದ್ದೂರ", "hobli": "ಆತಗೂರು ಹೋಬಳಿ", "village": "ಕದಲೂರು", "crop": "ರಾಗಿ", "syno": "277/RS/1", "date": "2027-01-09", "date_disp": "09/01/2027", "pw": "Lakshmi", "phone": "7259778410", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911064, "taluk": "ಮದ್ದೂರ", "hobli": "ಆತಗೂರು ಹೋಬಳಿ", "village": "ಕದಲೂರು", "crop": "ರಾಗಿ", "syno": "32/RS/2", "date": "2027-01-09", "date_disp": "09/01/2027", "pw": "Lakshmi", "phone": "7259778410", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911255, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ನಿಡಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "172/*/1", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "PRASANTHBABU", "phone": "9449284499", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "AD", "id": 6911256, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ನಿಡಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "128/*/10", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "PRASANTHBABU", "phone": "9449284499", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "AD", "id": 6911371, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗುಳಘಟ್ಟ", "crop": "ರಾಗಿ", "syno": "20/*/2", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "Mallesh kp", "phone": "8880112669", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911372, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗುಳಘಟ್ಟ", "crop": "ರಾಗಿ", "syno": "62/*/6", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "Mallesh kp", "phone": "8880112669", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6911947, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಬಿ.ಹೊಸೂರು", "crop": "ಭತ್ತ", "syno": "9/*/2", "date": "2027-01-04", "date_disp": "04/01/2027", "pw": "MADHUKARA K P", "phone": "9845394546", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "AD", "id": 6911948, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಬಿ.ಹೊಸೂರು", "crop": "ಭತ್ತ", "syno": "10/*/1", "date": "2027-01-04", "date_disp": "04/01/2027", "pw": "MADHUKARA K P", "phone": "9845394546", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "AD", "id": 6922529, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ಚೊಟ್ಟನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "15/RS/8B", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "JEEVAN S M", "phone": "7348923859", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6922530, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ಚೊಟ್ಟನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "50/RS/4", "date": "2026-12-08", "date_disp": "08/12/2026", "pw": "JEEVAN S M", "phone": "7348923859", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6922531, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ದೊಡ್ಡಹಾರೊಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "19/*/7C", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "Jamsheer", "phone": "9901945597", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6922532, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ದೊಡ್ಡಹಾರೊಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "20/*/6", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "Jamsheer", "phone": "9901945597", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6944415, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಶೆಟ್ಟಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "76/*/4", "date": "2027-01-20", "date_disp": "20/01/2027", "pw": "IRANNA TIPPANNA DANASUR", "phone": "8496981165", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6944416, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಶೆಟ್ಟಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "79/*/6", "date": "2027-01-20", "date_disp": "20/01/2027", "pw": "IRANNA TIPPANNA DANASUR", "phone": "8496981165", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6944615, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬೆಳ್ಳೂರು", "village": "ಹೊನ್ನೇನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "208/*/*", "date": "2027-01-08", "date_disp": "08/01/2027", "pw": "JAMUNA D J", "phone": "8971847930", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "AD", "id": 6944616, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬೆಳ್ಳೂರು", "village": "ಹೊನ್ನೇನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "92/*/8", "date": "2027-01-23", "date_disp": "23/01/2027", "pw": "JAMUNA D J", "phone": "8971847930", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910055, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ1", "village": "ಹರಳಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "4/*/1", "date": "2027-02-04", "date_disp": "04/02/2027", "pw": "KUMAR", "phone": "9900869967", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910056, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ1", "village": "ಕೆನ್ನಾಳು", "crop": "ಭತ್ತ", "syno": "45/*/1", "date": "2026-12-07", "date_disp": "07/12/2026", "pw": "KUMAR", "phone": "9900869967", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910066, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ಅಗಟಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "73/*/2", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "GOOLAPPA HORATTI", "phone": "9844394697", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910078, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಇಳ್ಳೇನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "33/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "VISHWANATHACHARI", "phone": "9880156892", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910079, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ದೊಡ್ಡಬೋಗನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "68/*/2", "date": "2026-12-16", "date_disp": "16/12/2026", "pw": "PRASANTH", "phone": "8970544234", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910087, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಬೇಬಿ", "crop": "ಭತ್ತ", "syno": "17/*/9", "date": "2027-01-09", "date_disp": "09/01/2027", "pw": "ARUNESH", "phone": "9341050545", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910119, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ಬಳಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "9/*/3", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "LOKESH T K", "phone": "9686338503", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910137, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ಕನಗನಮರಡಿ", "crop": "ಭತ್ತ", "syno": "97/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "RAJENDRA T K", "phone": "9480872401", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910149, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ತಿರುಮಲಾಪುರ / ತೊಣ್ಣೂರು", "crop": "ರಾಗಿ", "syno": "8/*/2", "date": "2026-12-07", "date_disp": "07/12/2026", "pw": "PRASANTH", "phone": "8970544234", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910157, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಸೀತಾಪುರ", "crop": "ಭತ್ತ", "syno": "93/*/1", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "RAGHU B N", "phone": "9902638279", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910163, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಬಿಂಡಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "94/*/*", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "ASHA B S", "phone": "9980144936", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910167, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಗಿರಿಯಾರಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "93/*/3A", "date": "2026-12-12", "date_disp": "12/12/2026", "pw": "MAHADEVU", "phone": "8197072938", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910171, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ಬೋರಾಪುರ", "crop": "ಭತ್ತ", "syno": "15/*/14", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "AARATHIKUMARI", "phone": "9945691770", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910175, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ಗರುಡಪುರ", "crop": "ರಾಗಿ", "syno": "7/*/2", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "RANJITHA", "phone": "8088657694", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910179, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ನಾರಾಯಣಪುರ", "crop": "ಭತ್ತ", "syno": "114/*/*", "date": "2026-12-12", "date_disp": "12/12/2026", "pw": "T B JAGADEESH", "phone": "8310435709", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910193, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ1", "village": "ಕೆ.ಬೆಟ್ಟಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "81/*/3", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "DEVARAJU B H", "phone": "9980447513", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910203, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ತಿರುಮಲಾಪುರ", "crop": "ರಾಗಿ", "syno": "2/*/3", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "GOOLAPPA HORATTI", "phone": "9844394697", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910209, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ1", "village": "ಶ್ಯಾದನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "112/*/2", "date": "2027-01-27", "date_disp": "27/01/2027", "pw": "RAJU HANUMANTA LAMANI", "phone": "8618539298", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910213, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಕಸಬಾ2", "village": "ಅಗಟಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "93/*/9", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "GOOLAPPA HORATTI", "phone": "9844394697", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910247, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಬೇಬಿ", "crop": "ರಾಗಿ", "syno": "220/*/7", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "SIDDESH", "phone": "9353732880", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910255, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಬೇಬಿ", "crop": "ಹುರುಳಿ", "syno": "220/*/9", "date": "2027-01-09", "date_disp": "09/01/2027", "pw": "SIDDESH", "phone": "9353732880", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910273, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಕಡಬ", "crop": "ತೊಗರಿ ", "syno": "104/*/4", "date": "2026-12-04", "date_disp": "04/12/2026", "pw": "KIRAN", "phone": "9380741819", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910315, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಚಿನಕುರಳಿ", "village": "ಕಟ್ಟೇರಿ", "crop": "ಕಬ್ಬು", "syno": "92/*/1", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "NANJUNDASWAMY", "phone": "8951469177", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910329, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ಬಳಘಟ್ಟ", "crop": "ರಾಗಿ", "syno": "34/*/8B", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "RAMESH M", "phone": "9686857400", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910339, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ನರಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "92/*/3", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "BHEEMANNA", "phone": "9591716209", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910357, "taluk": "ಪಾಂಡವಪುರ", "hobli": "ಮೇಲುಕೋಟೆ", "village": "ಮಹದೇಶ್ವರಪುರ", "crop": "ಎಲೆಕೋಸು", "syno": "107/*/7", "date": "2026-11-21", "date_disp": "21/11/2026", "pw": "PAVITHRA M S", "phone": "8296044765", "dept": "Department of Horticulture", "desig": "HA"}, {"sup": "SI", "id": 6910821, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಕಬ್ಬಾರೆ", "crop": "ಭತ್ತ", "syno": "61/*/5", "date": "2027-01-11", "date_disp": "11/01/2027", "pw": "SINCHANA", "phone": "7892342624", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910822, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಕಬ್ಬಾರೆ", "crop": "ಭತ್ತ", "syno": "61/*/2", "date": "2027-01-11", "date_disp": "11/01/2027", "pw": "SINCHANA", "phone": "7892342624", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910835, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ- IIIನೇ ವಲಯ", "village": "ಕಾಡುಕೊತ್ತನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "195/*/1", "date": "2027-01-29", "date_disp": "29/01/2027", "pw": "ASHWINI", "phone": "7337760062", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910836, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ- IIIನೇ ವಲಯ", "village": "ಕಾಡುಕೊತ್ತನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "37/*/3", "date": "2027-02-05", "date_disp": "05/02/2027", "pw": "ASHWINI", "phone": "7337760062", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910837, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ- IIIನೇ ವಲಯ", "village": "ಭುಜವಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "54/*/4", "date": "2027-01-31", "date_disp": "31/01/2027", "pw": "ASHWINI", "phone": "7337760062", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910838, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ- IIIನೇ ವಲಯ", "village": "ಭುಜವಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "59/*/3", "date": "2027-01-31", "date_disp": "31/01/2027", "pw": "ASHWINI", "phone": "7337760062", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910853, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ - IIನೇ ವಲಯ", "village": "ಬೊಪ್ಪಸಮುದ್ರ", "crop": "ಭತ್ತ", "syno": "88/*/1", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "VENKATESH", "phone": "7019696232", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910854, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ - IIನೇ ವಲಯ", "village": "ಬೊಪ್ಪಸಮುದ್ರ", "crop": "ಭತ್ತ", "syno": "26/*/8", "date": "2027-01-09", "date_disp": "09/01/2027", "pw": "VENKATESH", "phone": "7019696232", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910857, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-II ನೇ ವಲಯ", "village": "ಚುಂಚಗಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "39/*/4", "date": "2027-01-06", "date_disp": "06/01/2027", "pw": "PRABHAKARA", "phone": "8970715252", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910858, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-II ನೇ ವಲಯ", "village": "ಚುಂಚಗಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "7/*/5", "date": "2027-01-06", "date_disp": "06/01/2027", "pw": "PRABHAKARA", "phone": "8970715252", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910881, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ-Iನೇ ವಲಯ", "village": "ಹೊಸಗಾವಿ", "crop": "ಭತ್ತ", "syno": "229/*/29", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "ANANDAMURTHY", "phone": "9380374788", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910882, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ-Iನೇ ವಲಯ", "village": "ಹೊಸಗಾವಿ", "crop": "ಭತ್ತ", "syno": "225/*/9", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "ANANDAMURTHY", "phone": "9380374788", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910921, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ Iನೇ ವಲಯ", "village": "ಕಾರ್ಕಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "97/*/*", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "HARISH P R", "phone": "9480872236", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910922, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ Iನೇ ವಲಯ", "village": "ಕಾರ್ಕಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "98/*/5", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "HARISH P R", "phone": "9480872236", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6910979, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಮದ್ದೂರು", "crop": "ಭತ್ತ", "syno": "94/*/2B", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "ಪುಟ್ಟನಜಂಯ್ಯ", "phone": "9916328316", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6910980, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-1ನೇ ವಲಯ", "village": "ಮದ್ದೂರು", "crop": "ಭತ್ತ", "syno": "94/*/3", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "ಪುಟ್ಟನಜಂಯ್ಯ", "phone": "9916328316", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911011, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-II ನೇ ವಲಯ", "village": "ಚಂದಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "4/*/5", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "Anjanappa Maddi", "phone": "8310114843", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911012, "taluk": "ಮದ್ದೂರ", "hobli": "ಕಸಬ-II ನೇ ವಲಯ", "village": "ಚಂದಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "6/*/9", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "Anjanappa Maddi", "phone": "8310114843", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911085, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ-IIನೇ ವಲಯ", "village": "ತಗ್ಗಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "117/*/*", "date": "2027-01-30", "date_disp": "30/01/2027", "pw": "NINGEGOWDA", "phone": "8970741781", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911086, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ-IIನೇ ವಲಯ", "village": "ತಗ್ಗಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "243/*/*", "date": "2027-01-28", "date_disp": "28/01/2027", "pw": "NINGEGOWDA", "phone": "8970741781", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911091, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ-Iನೇ ವಲಯ", "village": "ಹರಳಕೆರೆ", "crop": "ರಾಗಿ", "syno": "38/*/2", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "Somesha", "phone": "7022334020", "dept": "Department of Horticulture", "desig": "AHO"}, {"sup": "SI", "id": 6911092, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ-Iನೇ ವಲಯ", "village": "ಹರಳಕೆರೆ", "crop": "ರಾಗಿ", "syno": "38/*/4", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "Somesha", "phone": "7022334020", "dept": "Department of Horticulture", "desig": "AHO"}, {"sup": "SI", "id": 6911123, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ ಹೋಬಳಿ", "village": "ಬೆಕ್ಕಳಲೆ", "crop": "ಹುರುಳಿ", "syno": "186/*/27", "date": "2027-01-23", "date_disp": "23/01/2027", "pw": "Beeresh", "phone": "9663042377", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911124, "taluk": "ಮದ್ದೂರ", "hobli": "ಕೊಪ್ಪ ಹೋಬಳಿ", "village": "ಬೆಕ್ಕಳಲೆ", "crop": "ಹುರುಳಿ", "syno": "186/*/3", "date": "2027-01-22", "date_disp": "22/01/2027", "pw": "Beeresh", "phone": "9663042377", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911185, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ Iನೇ ವಲಯ", "village": "ಕೂಳಗೆರೆ", "crop": "ಹುರುಳಿ", "syno": "73/*/2", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "MANJUNATH S R", "phone": "8105812359", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911186, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ Iನೇ ವಲಯ", "village": "ಕೂಳಗೆರೆ", "crop": "ಹುರುಳಿ", "syno": "72/*/1", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "MANJUNATH S R", "phone": "8105812359", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911193, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ Iನೇ ವಲಯ", "village": "ಆಲಭೂಜನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "28/*/3", "date": "2027-07-10", "date_disp": "10/07/2027", "pw": "MANOHAR HOONAPPA", "phone": "7348835965", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911194, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ Iನೇ ವಲಯ", "village": "ಆಲಭೂಜನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "28/*/4B", "date": "2027-07-06", "date_disp": "06/07/2027", "pw": "MANOHAR HOONAPPA", "phone": "7348835965", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911201, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ- IIIನೇ ವಲಯ", "village": "ಸಬ್ಬನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "66/*/6", "date": "2027-02-09", "date_disp": "09/02/2027", "pw": "AKSHAY KEERTHI", "phone": "8660817961", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911202, "taluk": "ಮದ್ದೂರ", "hobli": "C.A.ಕೆರೆ- IIIನೇ ವಲಯ", "village": "ಸಬ್ಬನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "66/*/9", "date": "2027-01-19", "date_disp": "19/01/2027", "pw": "AKSHAY KEERTHI", "phone": "8660817961", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911203, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ II", "village": "ಮಾಗನೂರು", "crop": "ಭತ್ತ", "syno": "72/*/73ರಬಾಜು5-p2", "date": "2026-12-20", "date_disp": "20/12/2026", "pw": "Ramakrishna", "phone": "9916236833", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911204, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ II", "village": "ಮಾಗನೂರು", "crop": "ಭತ್ತ", "syno": "56/*/1", "date": "2027-01-22", "date_disp": "22/01/2027", "pw": "Ramakrishna", "phone": "9916236833", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911231, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ಕಿರುಗಾವಲು", "crop": "ಭತ್ತ", "syno": "6/*/1", "date": "2026-12-17", "date_disp": "17/12/2026", "pw": "HARISHANKAR", "phone": "9480872297", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911232, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ಕಿರುಗಾವಲು", "crop": "ಭತ್ತ", "syno": "6/*/3", "date": "2026-12-16", "date_disp": "16/12/2026", "pw": "HARISHANKAR", "phone": "9480872297", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911233, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ಕಿರುಗಾವಲು", "crop": "ಭತ್ತ", "syno": "23/*/3", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "HARISHANKAR", "phone": "9480872297", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911234, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ಕಿರುಗಾವಲು", "crop": "ಭತ್ತ", "syno": "23/*/6", "date": "2026-12-16", "date_disp": "16/12/2026", "pw": "HARISHANKAR", "phone": "9480872297", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911257, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ಭತ್ತ", "syno": "7/*/*", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "PRASANTHBABU", "phone": "9449284499", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911258, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ಭತ್ತ", "syno": "172/*/1", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "PRASANTHBABU", "phone": "9449284499", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911269, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ III", "village": "ರಾಗಿಬೊಮ್ಮನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "278/*/4", "date": "2026-12-20", "date_disp": "20/12/2026", "pw": "ERANAAIAH", "phone": "9972016450", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911270, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ III", "village": "ರಾಗಿಬೊಮ್ಮನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "280/*/2", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "ERANAAIAH", "phone": "9972016450", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911361, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಆಮೃತೇಶ್ವರನಹಳ್ಳಿ", "crop": "ಮುಸುಕಿನ ಜೋಳ ", "syno": "63/*/3", "date": "2026-10-30", "date_disp": "30/10/2026", "pw": "TEJA", "phone": "8861429431", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911362, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಆಮೃತೇಶ್ವರನಹಳ್ಳಿ", "crop": "ಮುಸುಕಿನ ಜೋಳ ", "syno": "63/*/4", "date": "2026-10-30", "date_disp": "30/10/2026", "pw": "TEJA", "phone": "8861429431", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911399, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ- III", "village": "ಬೆಳತ್ತೂರು", "crop": "ಹುರುಳಿ", "syno": "40/*/1A", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "ABHIJITH", "phone": "9743444921", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911400, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ- III", "village": "ಬೆಳತ್ತೂರು", "crop": "ಹುರುಳಿ", "syno": "40/*/1B", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "ABHIJITH", "phone": "9743444921", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911441, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ನೇಣನೂರು", "crop": "ರಾಗಿ", "syno": "162/*/5", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "Prathimma S M", "phone": "7022676381", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911442, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ನೇಣನೂರು", "crop": "ರಾಗಿ", "syno": "167/*/2", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "Prathimma S M", "phone": "7022676381", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911593, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಹಲಗೂರು ಹೋಬಳಿ", "village": "ದೊಡ್ಡಎಲಚಿಗೆರೆ", "crop": "ರಾಗಿ", "syno": "16/*/2", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "G LATHA", "phone": "7337744405", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911594, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಹಲಗೂರು ಹೋಬಳಿ", "village": "ದೊಡ್ಡಎಲಚಿಗೆರೆ", "crop": "ರಾಗಿ", "syno": "16/*/4", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "G LATHA", "phone": "7337744405", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911893, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಪುರ", "crop": "ಭತ್ತ", "syno": "36/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "K.S.KUMAR", "phone": "9242441407", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911894, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಪುರ", "crop": "ಭತ್ತ", "syno": "35/*/3", "date": "2027-01-04", "date_disp": "04/01/2027", "pw": "K.S.KUMAR", "phone": "9242441407", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911981, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಸಿಂಧಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "258/*/3", "date": "2027-01-21", "date_disp": "21/01/2027", "pw": "Vani", "phone": "9482000763", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911982, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಸಿಂಧಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "245/*/3", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "Vani", "phone": "9482000763", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911983, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಸಿಂಧಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "357/*/1", "date": "2026-12-21", "date_disp": "21/12/2026", "pw": "Vani", "phone": "9482000763", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911984, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಸಿಂಧಘಟ್ಟ", "crop": "ಭತ್ತ", "syno": "356/*/4", "date": "2026-12-21", "date_disp": "21/12/2026", "pw": "Vani", "phone": "9482000763", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6911985, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "crop": "ಭತ್ತ", "syno": "116/*/1", "date": "2026-11-15", "date_disp": "15/11/2026", "pw": "JAGADEESH S S", "phone": "9880476929", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911986, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "crop": "ಭತ್ತ", "syno": "117/*/1", "date": "2026-11-15", "date_disp": "15/11/2026", "pw": "JAGADEESH S S", "phone": "9880476929", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911987, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಹೊಸಹೊಳಲು", "crop": "ಭತ್ತ", "syno": "311/*/2", "date": "2026-11-15", "date_disp": "15/11/2026", "pw": "JAGADEESH S S", "phone": "9880476929", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6911988, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಹೊಸಹೊಳಲು", "crop": "ಭತ್ತ", "syno": "313/*/3", "date": "2026-11-15", "date_disp": "15/11/2026", "pw": "JAGADEESH S S", "phone": "9880476929", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912027, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಹೊಸಹೊಳಲು", "crop": "ಹುರುಳಿ", "syno": "108/*/1", "date": "2026-12-04", "date_disp": "04/12/2026", "pw": "JAGADEESH S S", "phone": "9880476929", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912028, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಸಬಾ", "village": "ಹೊಸಹೊಳಲು", "crop": "ಹುರುಳಿ", "syno": "108/*/6", "date": "2026-12-04", "date_disp": "04/12/2026", "pw": "JAGADEESH S S", "phone": "9880476929", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912077, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಿಕ್ಕೇರಿ", "village": "ತೊಳಸಿ", "crop": "ರಾಗಿ", "syno": "45/*/1", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "PRASANNA B M", "phone": "8123862488", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912078, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಿಕ್ಕೇರಿ", "village": "ತೊಳಸಿ", "crop": "ರಾಗಿ", "syno": "45/*/2", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "PRASANNA B M", "phone": "8123862488", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912107, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಿಕ್ಕೇರಿ", "village": "ತೆಂಗಿನಘಟ್ಟ", "crop": "ಹುರುಳಿ", "syno": "46/*/7", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "MAAGALA VANAJAKSHI", "phone": "7338389119", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912108, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಕಿಕ್ಕೇರಿ", "village": "ತೆಂಗಿನಘಟ್ಟ", "crop": "ಹುರುಳಿ", "syno": "57/*/3B", "date": "2026-12-21", "date_disp": "21/12/2026", "pw": "MAAGALA VANAJAKSHI", "phone": "7338389119", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912154, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಶೀರಬಿಲ್ಲೇನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "38/*/2", "date": "2026-12-16", "date_disp": "16/12/2026", "pw": "MALKAJ MADIWALAR", "phone": "9743176838", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912155, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಶೀರಬಿಲ್ಲೇನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "37/*/4", "date": "2026-12-16", "date_disp": "16/12/2026", "pw": "MALKAJ MADIWALAR", "phone": "9743176838", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912187, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಮರುವನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "7/*/2", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "KENCHAPPA K", "phone": "6361101762", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912188, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ಮರುವನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "5/*/2", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "KENCHAPPA K", "phone": "6361101762", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912225, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ತೆಂಡೆಕೆರೆ", "crop": "ಕಬ್ಬು", "syno": "100/*/2", "date": "2027-06-20", "date_disp": "20/06/2027", "pw": "DHARMAPARA  ANAND", "phone": "8722385088", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912226, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಶೀಳನೆರೆ", "village": "ತೆಂಡೆಕೆರೆ", "crop": "ಕಬ್ಬು", "syno": "100/*/7", "date": "2027-06-20", "date_disp": "20/06/2027", "pw": "DHARMAPARA  ANAND", "phone": "8722385088", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912235, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಮೋದೂರು", "crop": "ರಾಗಿ", "syno": "55/*/5", "date": "2026-11-24", "date_disp": "24/11/2026", "pw": "PRASANTH N KHANAPURA", "phone": "9980033243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912236, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಮೋದೂರು", "crop": "ರಾಗಿ", "syno": "55/*/7", "date": "2026-11-20", "date_disp": "20/11/2026", "pw": "PRASANTH N KHANAPURA", "phone": "9980033243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912243, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಜಕ್ಕನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "3/*/3", "date": "2026-11-20", "date_disp": "20/11/2026", "pw": "PRASANTH N KHANAPURA", "phone": "9980033243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912244, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಜಕ್ಕನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "3/*/4", "date": "2026-11-24", "date_disp": "24/11/2026", "pw": "PRASANTH N KHANAPURA", "phone": "9980033243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912259, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಬಣ್ಣೇನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "32/*/2A", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "SHASHIKUMAR MADDI", "phone": "7019148500", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912260, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಬಣ್ಣೇನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "32/*/3", "date": "2027-01-10", "date_disp": "10/01/2027", "pw": "SHASHIKUMAR MADDI", "phone": "7019148500", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912267, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಬೂಕಿನಕೆರೆ", "crop": "ಹುರುಳಿ", "syno": "171/*/2", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "PRASANTH N KHANAPURA", "phone": "9980033243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912268, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಬೂಕಿನಕೆರೆ", "village": "ಬೂಕಿನಕೆರೆ", "crop": "ಹುರುಳಿ", "syno": "171/*/3", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "PRASANTH N KHANAPURA", "phone": "9980033243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912437, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಸಂತೇಬಾಚಹಳ್ಳಿ", "village": "ಅಘಲಯ", "crop": "ಹುರುಳಿ", "syno": "260/*/3", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "LAKSHMI HANUMANTA KATTIMANI", "phone": "9019242235", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6912438, "taluk": "ಕೃಷ್ಣರಾಜಪೇಟೆ", "hobli": "ಸಂತೇಬಾಚಹಳ್ಳಿ", "village": "ಅಘಲಯ", "crop": "ಹುರುಳಿ", "syno": "260/*/4", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "LAKSHMI HANUMANTA KATTIMANI", "phone": "9019242235", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922469, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಪಾಲಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "217/*/5", "date": "2026-11-12", "date_disp": "12/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922470, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಪಾಲಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "218/*/2", "date": "2026-11-12", "date_disp": "12/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922471, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಕರಿಮಂಟೆ (ಬೆ)", "crop": "ಭತ್ತ", "syno": "159/*/3", "date": "2026-11-20", "date_disp": "20/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922472, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಕರಿಮಂಟೆ (ಬೆ)", "crop": "ಭತ್ತ", "syno": "159/*/6", "date": "2026-11-20", "date_disp": "20/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922477, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಬೆಳಗೊಳ", "crop": "ಭತ್ತ", "syno": "72/*/*", "date": "2026-11-17", "date_disp": "17/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922478, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಬೆಳಗೊಳ", "crop": "ಭತ್ತ", "syno": "71/*/*", "date": "2026-11-17", "date_disp": "17/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922479, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಬೆಳಗೊಳ", "crop": "ಭತ್ತ", "syno": "255/*/3", "date": "2026-11-17", "date_disp": "17/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922480, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಬೆಳಗೊಳ", "crop": "ಭತ್ತ", "syno": "255/*/4", "date": "2026-11-17", "date_disp": "17/11/2026", "pw": "ಉಮೇಶ್", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922481, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಮಜ್ಜಿಗೆಪುರ", "crop": "ಭತ್ತ", "syno": "134/*/*", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "PRUTHVI RAJ", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922482, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಮಜ್ಜಿಗೆಪುರ", "crop": "ಭತ್ತ", "syno": "54/*/*", "date": "2026-12-26", "date_disp": "26/12/2026", "pw": "PRUTHVI RAJ", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922483, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಹೊಂಗಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "271/*/8", "date": "2026-12-21", "date_disp": "21/12/2026", "pw": "PRUTHVI RAJ", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922484, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಬೆಳಗೊಳ", "village": "ಹೊಂಗಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "263/*/5", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "PRUTHVI RAJ", "phone": "9980894460", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922547, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕಸಬ", "village": "ಹೆಬ್ಬಾಡಿ", "crop": "ಕಬ್ಬು", "syno": "281/*/6", "date": "2026-09-12", "date_disp": "12/09/2026", "pw": "Kubera", "phone": "9513069949", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922548, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕಸಬ", "village": "ಹೆಬ್ಬಾಡಿ", "crop": "ಕಬ್ಬು", "syno": "281/*/5", "date": "2026-09-19", "date_disp": "19/09/2026", "pw": "Kubera", "phone": "9513069949", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922565, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ಸಿದ್ದಾಪುರ", "crop": "ಹುರುಳಿ", "syno": "152/*/*", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "THAMMANA", "phone": "9380492867", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6922566, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ಸಿದ್ದಾಪುರ", "crop": "ಹುರುಳಿ", "syno": "150/*/8", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "THAMMANA", "phone": "9380492867", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6922567, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ಕಾಳೇನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "9/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "LAKKAPPA", "phone": "9632722993", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922568, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ಕಾಳೇನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "11/*/4", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "LAKKAPPA", "phone": "9632722993", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922569, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ನೀಲನಕೊಪ್ಪಲು", "crop": "ಹುರುಳಿ", "syno": "25/*/7", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "LAKKAPPA", "phone": "9632722993", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922570, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ನೀಲನಕೊಪ್ಪಲು", "crop": "ಹುರುಳಿ", "syno": "25/*/4", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "LAKKAPPA", "phone": "9632722993", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922571, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ನಾಗರಘಟ್ಟ (ಬೆ)", "crop": "ಹುರುಳಿ", "syno": "35/*/6", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "LAKKAPPA", "phone": "9632722993", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922572, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಕೆ.ಶೆಟ್ಟಿಹಳ್ಳಿ-2", "village": "ನಾಗರಘಟ್ಟ (ಬೆ)", "crop": "ಹುರುಳಿ", "syno": "35/*/2", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "LAKKAPPA", "phone": "9632722993", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922607, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ವಿಠಲಾಪುರ (ಬೆ)", "crop": "ಹುರುಳಿ", "syno": "36/*/3", "date": "2026-12-18", "date_disp": "18/12/2026", "pw": "Mohan kumar", "phone": "8095082685", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6922608, "taluk": "ಶ್ರೀರಂಗಪಟ್ಟಣ", "hobli": "ಅರಕೆರೆ", "village": "ವಿಠಲಾಪುರ (ಬೆ)", "crop": "ಹುರುಳಿ", "syno": "36/*/9", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "Mohan kumar", "phone": "8095082685", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944381, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಮುದ್ದೇನಹಟ್ಟಿ", "crop": "ರಾಗಿ", "syno": "25/*/16", "date": "2027-01-25", "date_disp": "25/01/2027", "pw": "SADDAMHUSINE MULLA", "phone": "8095597494", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944382, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಮುದ್ದೇನಹಟ್ಟಿ", "crop": "ರಾಗಿ", "syno": "25/*/13", "date": "2027-01-25", "date_disp": "25/01/2027", "pw": "SADDAMHUSINE MULLA", "phone": "8095597494", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944447, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಹೊಣಕೆರೆ", "village": "ಗೆಜ್ಜೆಹೊಸಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "4/*/8", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "MALATESHA", "phone": "9353244627", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944448, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಹೊಣಕೆರೆ", "village": "ಗೆಜ್ಜೆಹೊಸಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "5/*/3", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "MALATESHA", "phone": "9353244627", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944467, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಕಸಬಾ", "village": "ಹುಲಿಕೆರೆ", "crop": "ರಾಗಿ", "syno": "3/*/2", "date": "2026-12-03", "date_disp": "03/12/2026", "pw": "SINCHANA", "phone": "8310937410", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944468, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಕಸಬಾ", "village": "ಹುಲಿಕೆರೆ", "crop": "ರಾಗಿ", "syno": "12/*/3A", "date": "2026-12-03", "date_disp": "03/12/2026", "pw": "SINCHANA", "phone": "8310937410", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944487, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಕಸಬಾ", "village": "ಅಂಚೆಭುವನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "60/*/8", "date": "2027-01-20", "date_disp": "20/01/2027", "pw": "SOWMYA P", "phone": "9663552445", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944488, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಕಸಬಾ", "village": "ಅಂಚೆಭುವನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "66/*/16", "date": "2027-01-20", "date_disp": "20/01/2027", "pw": "SOWMYA P", "phone": "9663552445", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944495, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಕಸಬಾ", "village": "ಹುಲಿಕೆರೆ", "crop": "ರಾಗಿ", "syno": "52/*/5", "date": "2026-12-03", "date_disp": "03/12/2026", "pw": "SINCHANA", "phone": "8310937410", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944496, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಕಸಬಾ", "village": "ಹುಲಿಕೆರೆ", "crop": "ರಾಗಿ", "syno": "52/*/3", "date": "2026-12-03", "date_disp": "03/12/2026", "pw": "SINCHANA", "phone": "8310937410", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944537, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಸುನಗನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "75/*/17", "date": "2026-12-08", "date_disp": "08/12/2026", "pw": "AVINASH", "phone": "9964600725", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "SI", "id": 6944538, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಸುನಗನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "75/*/19", "date": "2026-12-08", "date_disp": "08/12/2026", "pw": "AVINASH", "phone": "9964600725", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "SI", "id": 6944571, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಎಸ್.ಮುತ್ಸಂದ್ರ", "crop": "ಹುರುಳಿ", "syno": "7/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "AVINASH", "phone": "9964600725", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "SI", "id": 6944572, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಎಸ್.ಮುತ್ಸಂದ್ರ", "crop": "ಹುರುಳಿ", "syno": "4/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "AVINASH", "phone": "9964600725", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "SI", "id": 6944599, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ದೇವಲಾಪುರ", "village": "ಮುದ್ದೇನಹಟ್ಟಿ", "crop": "ಕಬ್ಬು", "syno": "49/*/7", "date": "2026-11-22", "date_disp": "22/11/2026", "pw": "AVINASH", "phone": "9964600725", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "SI", "id": 6944621, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬೆಳ್ಳೂರು", "village": "ಬಾಣನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "59/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "P B RAVI", "phone": "9740551175", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6944622, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬೆಳ್ಳೂರು", "village": "ಬಾಣನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "61/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "P B RAVI", "phone": "9740551175", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6944675, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬಿಂಡಿಗನವಿಲೆ", "village": "ಕುರುಡಿಕೆರೆ", "crop": "ಭತ್ತ", "syno": "92/*/1C", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "SAVITHRI YAMANAPPA HADAPAD", "phone": "7022629084", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944676, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬಿಂಡಿಗನವಿಲೆ", "village": "ಕುರುಡಿಕೆರೆ", "crop": "ಭತ್ತ", "syno": "92/*/3A", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "SAVITHRI YAMANAPPA HADAPAD", "phone": "7022629084", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944697, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬಿಂಡಿಗನವಿಲೆ", "village": "ಹೆಚ್.ಕ್ಯಾತನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "32/*/2", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "PUNDALIK", "phone": "8123931401", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944698, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಬಿಂಡಿಗನವಿಲೆ", "village": "ಹೆಚ್.ಕ್ಯಾತನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "33/*/1", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "PUNDALIK", "phone": "8123931401", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944759, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಹೊಣಕೆರೆ", "village": "ಮಂಚಪಟ್ಟಣ", "crop": "ಹುರುಳಿ", "syno": "7/*/1", "date": "2026-12-19", "date_disp": "19/12/2026", "pw": "PUNEETH KUMAR H", "phone": "9731837140", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944760, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಹೊಣಕೆರೆ", "village": "ಮಂಚಪಟ್ಟಣ", "crop": "ಹುರುಳಿ", "syno": "26/*/4", "date": "2026-12-19", "date_disp": "19/12/2026", "pw": "PUNEETH KUMAR H", "phone": "9731837140", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944765, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಹೊಣಕೆರೆ", "village": "ಜೋಡಿನೆರಲೆಕೆರೆ", "crop": "ಹುರುಳಿ", "syno": "33/*/4", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "BHARATHI", "phone": "7259919431", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944766, "taluk": "ನಾಗಮಂಗಲ", "hobli": "ಹೊಣಕೆರೆ", "village": "ಜೋಡಿನೆರಲೆಕೆರೆ", "crop": "ಹುರುಳಿ", "syno": "34/*/*", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "BHARATHI", "phone": "7259919431", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6944921, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಹುನುಗನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "43/*/*", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "H K JAVARAIAH", "phone": "9945645269", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6944922, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಹುನುಗನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "44/*/1", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "H K JAVARAIAH", "phone": "9945645269", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "SI", "id": 6945181, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಹೆಗ್ಗಡತಿಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "7/*/2", "date": "2027-01-28", "date_disp": "28/01/2027", "pw": "ARPITHA", "phone": "8970726581", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6945221, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಬೇಬಿ", "crop": "ಕಬ್ಬು", "syno": "39/*/2a", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "RENUKAMMA", "phone": "9620429289", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "SI", "id": 6945222, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಬೇಬಿ", "crop": "ಕಬ್ಬು", "syno": "39/*/5", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "RENUKAMMA", "phone": "9620429289", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911211, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ರಾವಣಿ", "crop": "ಭತ್ತ", "syno": "7/*/2", "date": "2026-12-19", "date_disp": "19/12/2026", "pw": "KRISHNA", "phone": "7760545905", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6911212, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ರಾವಣಿ", "crop": "ಭತ್ತ", "syno": "7/*/8", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "KRISHNA", "phone": "7760545905", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6911223, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಆಪ್ಪುಗೌಡನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "245/*/*", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "KHAN MAHAMAD", "phone": "8197477190", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6911224, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಆಪ್ಪುಗೌಡನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "244/*/2", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "KHAN MAHAMAD", "phone": "8197477190", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6911267, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ III", "village": "ರಾಗಿಬೊಮ್ಮನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "266/*/1", "date": "2026-12-16", "date_disp": "16/12/2026", "pw": "ERANAAIAH", "phone": "9972016450", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6911268, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ III", "village": "ರಾಗಿಬೊಮ್ಮನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "267/*/*", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "ERANAAIAH", "phone": "9972016450", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6911377, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ- III", "village": "ಅಂತರವಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "225/*/4", "date": "2026-11-20", "date_disp": "20/11/2026", "pw": "SHIVAPPA DAMANAL", "phone": "9964515364", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911378, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ- III", "village": "ಅಂತರವಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "225/*/2", "date": "2026-11-20", "date_disp": "20/11/2026", "pw": "SHIVAPPA DAMANAL", "phone": "9964515364", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911379, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ರಾಗಿ", "syno": "193/*/5", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "mahadevi j", "phone": "9538908797", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911380, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ರಾಗಿ", "syno": "193/*/4", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "mahadevi j", "phone": "9538908797", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911401, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ಹುರುಳಿ", "syno": "220/*/6", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "mahadevi j", "phone": "9538908797", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911402, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಸಬಾ - I", "village": "ಗಾಜನೂರು", "crop": "ಹುರುಳಿ", "syno": "220/*/7", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "mahadevi j", "phone": "9538908797", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911429, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ಕಿರುಗಾವಲು", "crop": "ರಾಗಿ", "syno": "330/*/4", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "SIRAMPPA", "phone": "8431474707", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911430, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ I", "village": "ಕಿರುಗಾವಲು", "crop": "ರಾಗಿ", "syno": "332/*/4", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "SIRAMPPA", "phone": "8431474707", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911491, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ II", "village": "ದುಗ್ಗನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "25/*/2ಪೈ-p2", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "DHANJAY", "phone": "8971106517", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6911492, "taluk": "ಮಳವಳ್ಳಿ", "hobli": "ಕಿರುಗಾವಲು ಹೋಬಳಿ II", "village": "ದುಗ್ಗನಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "25/*/2ಪೈ-p1", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "DHANJAY", "phone": "8971106517", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944803, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ನಾಯ್ಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "23/*/12", "date": "2026-12-19", "date_disp": "19/12/2026", "pw": "NITHIN", "phone": "9731034337", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944817, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬೂದನೂರು", "crop": "ಭತ್ತ", "syno": "60/*/2", "date": "2026-12-17", "date_disp": "17/12/2026", "pw": "PAVITHRA K N", "phone": "9742475511", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944821, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 2", "village": "ಚಲ್ಲಾನಾಯ್ಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "58/*/3", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944829, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ದೊಡ್ಡಗರುಡನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "70/*/2", "date": "2027-01-07", "date_disp": "07/01/2027", "pw": "SIDDARAJU", "phone": "9972045198", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944830, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ದೊಡ್ಡಗರುಡನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "15/*/13", "date": "2027-01-08", "date_disp": "08/01/2027", "pw": "SIDDARAJU", "phone": "9972045198", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944843, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಗಾಣದಾಳು", "crop": "ಭತ್ತ", "syno": "31/*/8", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "PAVITHRA", "phone": "8095122472", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944845, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಗೋಪಾಲಪುರ", "crop": "ಭತ್ತ", "syno": "50/*/3", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "M T Javaregowda", "phone": "9844497298", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944850, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಹೆಚ್.ಮಲ್ಲಿಗೆರೆ", "crop": "ಭತ್ತ", "syno": "156/*/4", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "NITHIN GOWDA", "phone": "9731034337", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944856, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 2", "village": "ಚೀರನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "130/*/18", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "KAMALA", "phone": "8105457965", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944869, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಈಚಗೆರೆ", "crop": "ಭತ್ತ", "syno": "105/*/9", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "JAYALAKSHMI", "phone": "7483711512", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944870, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಈಚಗೆರೆ", "crop": "ಭತ್ತ", "syno": "106/*/1C", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "JAYALAKSHMI", "phone": "7483711512", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944872, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಈಚಗೆರೆ", "crop": "ಭತ್ತ", "syno": "106/*/1F", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "JAYALAKSHMI", "phone": "7483711512", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944874, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಹೊಳಲು", "crop": "ಭತ್ತ", "syno": "464/*/2", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "GUNASHEKHAR C", "phone": "8310200879", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944882, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಟಿ.ಮಲ್ಲಿಗೆರೆ", "crop": "ಭತ್ತ", "syno": "89/*/1B", "date": "2026-12-11", "date_disp": "11/12/2026", "pw": "MANJUNATHA S", "phone": "9731088524", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944889, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಕನ್ನಲಿ", "crop": "ಭತ್ತ", "syno": "454/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "POORNIMA R B", "phone": "9686949243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944893, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಕೀಲಾರ", "crop": "ಭತ್ತ", "syno": "127/*/11", "date": "2026-12-01", "date_disp": "01/12/2026", "pw": "CHANDRA SHEKAR", "phone": "9740716572", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944899, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಕೆರಗೋಡು", "crop": "ಭತ್ತ", "syno": "87/*/3", "date": "2026-12-31", "date_disp": "31/12/2026", "pw": "S M INDRANI", "phone": "8073051304", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944900, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಕೆರಗೋಡು", "crop": "ಭತ್ತ", "syno": "86/*/3", "date": "2026-12-29", "date_disp": "29/12/2026", "pw": "S M INDRANI", "phone": "8073051304", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944905, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಪಣಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "79/*/3D4", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "TEJAS GOWDA P", "phone": "7022036006", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944910, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 2", "village": "ಮಂಗಲ", "crop": "ಭತ್ತ", "syno": "74/*/7", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "CHOWDAIAH", "phone": "9480560964", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944915, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಮಾರಗೌಡನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "272/*/5B", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "SOWMYA", "phone": "9538269633", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944916, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಮಾರಗೌಡನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "228/*/5", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "SOWMYA", "phone": "9538269633", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944923, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಮುತ್ತೆಗೆರೆ", "crop": "ಭತ್ತ", "syno": "212/*/8", "date": "2026-12-02", "date_disp": "02/12/2026", "pw": "H K JAVARAIAH", "phone": "9945645269", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944924, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಮುತ್ತೆಗೆರೆ", "crop": "ಭತ್ತ", "syno": "259/*/5", "date": "2026-12-02", "date_disp": "02/12/2026", "pw": "H K JAVARAIAH", "phone": "9945645269", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944926, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 2", "village": "ಸಂತೆಕೆಸಲಗೆರೆ", "crop": "ಭತ್ತ", "syno": "24/*/3", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "DEVAPPA", "phone": "9731296354", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944929, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಸಾತನೂರು", "crop": "ಭತ್ತ", "syno": "180/*/3A", "date": "2026-12-20", "date_disp": "20/12/2026", "pw": "PUNITHA", "phone": "9742226728", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944930, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಸಾತನೂರು", "crop": "ಭತ್ತ", "syno": "202/*/30", "date": "2026-12-20", "date_disp": "20/12/2026", "pw": "PUNITHA", "phone": "9742226728", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944931, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಸಾತನೂರು", "crop": "ಭತ್ತ", "syno": "202/*/21B", "date": "2026-12-20", "date_disp": "20/12/2026", "pw": "PUNITHA", "phone": "9742226728", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944932, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಸಾತನೂರು", "crop": "ಭತ್ತ", "syno": "180/*/5", "date": "2026-12-20", "date_disp": "20/12/2026", "pw": "PUNITHA", "phone": "9742226728", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944934, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 1", "village": "ಗೊರವಾಲೆ / ಮರಡೀಪುರ", "crop": "ಭತ್ತ", "syno": "87/*/2", "date": "2027-02-06", "date_disp": "06/02/2027", "pw": "SANDEEP KUMAR N", "phone": "8050081061", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944935, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 1", "village": "ಗೊರವಾಲೆ / ಮರಡೀಪುರ", "crop": "ಭತ್ತ", "syno": "96/*/5", "date": "2027-01-06", "date_disp": "06/01/2027", "pw": "SANDEEP KUMAR N", "phone": "8050081061", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944937, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 2", "village": "ಶಿವಪುರ", "crop": "ಭತ್ತ", "syno": "22/*/31", "date": "2027-01-28", "date_disp": "28/01/2027", "pw": "REKHA N G", "phone": "6361922516", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944938, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 2", "village": "ಶಿವಪುರ", "crop": "ಭತ್ತ", "syno": "32/*/4", "date": "2026-12-23", "date_disp": "23/12/2026", "pw": "REKHA N G", "phone": "6361922516", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944939, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 2", "village": "ಶಿವಪುರ", "crop": "ಭತ್ತ", "syno": "160/*/4", "date": "2026-12-13", "date_disp": "13/12/2026", "pw": "REKHA N G", "phone": "6361922516", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944940, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 2", "village": "ಶಿವಪುರ", "crop": "ಭತ್ತ", "syno": "34/*/7", "date": "2026-12-10", "date_disp": "10/12/2026", "pw": "REKHA N G", "phone": "6361922516", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944945, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 2", "village": "ಪುರ", "crop": "ಭತ್ತ", "syno": "21/*/1", "date": "2027-01-21", "date_disp": "21/01/2027", "pw": "RASHMI B M", "phone": "9738712992", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944948, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 2", "village": "ತಗ್ಗಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "98/*/8", "date": "2027-01-11", "date_disp": "11/01/2027", "pw": "RASHMI B M", "phone": "9738712992", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944953, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಉಮ್ಮಡಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "226/*/28", "date": "2026-12-17", "date_disp": "17/12/2026", "pw": "KUMAR M S", "phone": "8722366080", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944954, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಉಮ್ಮಡಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "8/*/3", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "KUMAR M S", "phone": "8722366080", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944955, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬೆಳ್ಳುಂಡಗೆರೆ", "crop": "ಭತ್ತ", "syno": "7/*/1", "date": "2026-12-19", "date_disp": "19/12/2026", "pw": "KUMAR M S", "phone": "8722366080", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944956, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬೆಳ್ಳುಂಡಗೆರೆ", "crop": "ಭತ್ತ", "syno": "38/*/9", "date": "2026-12-09", "date_disp": "09/12/2026", "pw": "KUMAR M S", "phone": "8722366080", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944957, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "172/*/6", "date": "2026-12-26", "date_disp": "26/12/2026", "pw": "MANJUNATHA NAGOORA METI", "phone": "8050887498", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944958, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "173/*/2", "date": "2026-12-21", "date_disp": "21/12/2026", "pw": "MANJUNATHA NAGOORA METI", "phone": "8050887498", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944959, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "171/*/7B", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "MANJUNATHA NAGOORA METI", "phone": "8050887498", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944960, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಭತ್ತ", "syno": "150/*/3", "date": "2026-12-25", "date_disp": "25/12/2026", "pw": "MANJUNATHA NAGOORA METI", "phone": "8050887498", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944965, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಆಲ್ಕೆರೆ", "crop": "ಭತ್ತ", "syno": "260/*/4", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "SANGEETHA C M", "phone": "9632855382", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944966, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಆಲ್ಕೆರೆ", "crop": "ಭತ್ತ", "syno": "263/*/2", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "SANGEETHA C M", "phone": "9632855382", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944967, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಮುದ್ದಂಗೆರೆ", "crop": "ಭತ್ತ", "syno": "28/*/1", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "SANGEETHA C M", "phone": "9632855382", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944968, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಮುದ್ದಂಗೆರೆ", "crop": "ಭತ್ತ", "syno": "43/*/*", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "SANGEETHA C M", "phone": "9632855382", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944969, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬಿ.ಗೌಡಗೆರೆ", "crop": "ಭತ್ತ", "syno": "329/*/5", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "NANDINI N", "phone": "9739272098", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944970, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬಿ.ಗೌಡಗೆರೆ", "crop": "ಭತ್ತ", "syno": "333/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "NANDINI N", "phone": "9739272098", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944971, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬಿ.ಗೌಡಗೆರೆ", "crop": "ಭತ್ತ", "syno": "280/*/1", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "NANDINI N", "phone": "9739272098", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944972, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬಿ.ಗೌಡಗೆರೆ", "crop": "ಭತ್ತ", "syno": "367/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "NANDINI N", "phone": "9739272098", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944977, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಮಂಡ್ಯ", "crop": "ಭತ್ತ", "syno": "377/*/2", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "ROOPA", "phone": "9591245479", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "ASO", "id": 6944978, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಮಂಡ್ಯ", "crop": "ಭತ್ತ", "syno": "377/*/1", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "ROOPA", "phone": "9591245479", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "ASO", "id": 6944979, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಮಂಡ್ಯ", "crop": "ಭತ್ತ", "syno": "377/*/3", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "ROOPA", "phone": "9591245479", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "ASO", "id": 6944980, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಮಂಡ್ಯ", "crop": "ಭತ್ತ", "syno": "377/*/4", "date": "2026-12-15", "date_disp": "15/12/2026", "pw": "ROOPA", "phone": "9591245479", "dept": "Agriculture Department", "desig": "AAO1"}, {"sup": "ASO", "id": 6944983, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಕನ್ನಲಿ", "crop": "ರಾಗಿ", "syno": "296/*/2A", "date": "2027-01-31", "date_disp": "31/01/2027", "pw": "POORNIMA R B", "phone": "9686949243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944984, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಕನ್ನಲಿ", "crop": "ರಾಗಿ", "syno": "457/*/2", "date": "2027-01-31", "date_disp": "31/01/2027", "pw": "POORNIMA R B", "phone": "9686949243", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944985, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬೂದನೂರು", "crop": "ರಾಗಿ", "syno": "65/*/9", "date": "2026-12-06", "date_disp": "06/12/2026", "pw": "PAVITHRA K N", "phone": "9742475511", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944986, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಬೂದನೂರು", "crop": "ರಾಗಿ", "syno": "65/*/6", "date": "2026-12-06", "date_disp": "06/12/2026", "pw": "PAVITHRA K N", "phone": "9742475511", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6944987, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಮಂಡ್ಯ", "crop": "ರಾಗಿ", "syno": "317/*/8", "date": "2027-01-05", "date_disp": "05/01/2027", "pw": "TEJAS GOWDA P", "phone": "7022036006", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944988, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 1", "village": "ಮಂಡ್ಯ", "crop": "ರಾಗಿ", "syno": "317/*/7C", "date": "2027-01-05", "date_disp": "05/01/2027", "pw": "TEJAS GOWDA P", "phone": "7022036006", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944989, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಹನಕೆರೆ", "crop": "ರಾಗಿ", "syno": "265/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "CHARANA H A", "phone": "8660191459", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6944990, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕಸಬಾ - 2", "village": "ಹನಕೆರೆ", "crop": "ರಾಗಿ", "syno": "263/*/2", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "CHARANA H A", "phone": "8660191459", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945015, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 1", "village": "ಯಲಿಯೂರು", "crop": "ರಾಗಿ", "syno": "57/*/18", "date": "2026-12-27", "date_disp": "27/12/2026", "pw": "SUDARSHAN B S", "phone": "9902820710", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945030, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 1", "village": "ನೊದೆಕೊಪ್ಪಲು", "crop": "ರಾಗಿ", "syno": "134/*/11", "date": "2027-02-14", "date_disp": "14/02/2027", "pw": "GOVARDAN R", "phone": "9886343604", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945053, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 1", "village": "ಹುಲ್ಲುಕೆರೆ", "crop": "ಕಬ್ಬು", "syno": "49/*/2B", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945054, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 1", "village": "ಹುಲ್ಲುಕೆರೆ", "crop": "ಕಬ್ಬು", "syno": "52/*/3A", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945057, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 1", "village": "ಹುಲ್ಲುಕೆರೆ", "crop": "ಕಬ್ಬು", "syno": "98/*/1A3", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945058, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೊತ್ತತ್ತಿ - 1", "village": "ಹುಲ್ಲುಕೆರೆ", "crop": "ಕಬ್ಬು", "syno": "98/*/3B2", "date": "2026-12-05", "date_disp": "05/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945061, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಚಿಕ್ಕಬಾಣಸವಾಡಿ", "crop": "ರಾಗಿ", "syno": "17/*/3A", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945064, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಚಿಕ್ಕಬಾಣಸವಾಡಿ", "crop": "ರಾಗಿ", "syno": "27/*/7", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945066, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "4/*/4", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945067, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "83/*/6", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945068, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "84/*/*", "date": "2026-12-30", "date_disp": "30/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945071, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "81/*/3", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945072, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "82/*/1", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945075, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "94/*/1", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945076, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಚೋಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "88/*/*", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945077, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಉಪ್ಪರಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "93/*/4", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945078, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಉಪ್ಪರಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "93/*/10", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945079, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಉಪ್ಪರಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "73/*/*", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945080, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು - 2", "village": "ಉಪ್ಪರಕನಹಳ್ಳಿ", "crop": "ಹುರುಳಿ", "syno": "93/*/1", "date": "2026-12-22", "date_disp": "22/12/2026", "pw": "SHANKAREGOWDA G", "phone": "9901245637", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945083, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "83/*/2", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945084, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "83/*/4", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945085, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಚಿಕ್ಕಬಾಣಸವಾಡಿ", "crop": "ಕಬ್ಬು", "syno": "72/*/4", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945086, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ಚಿಕ್ಕಬಾಣಸವಾಡಿ", "crop": "ಕಬ್ಬು", "syno": "52/*/2", "date": "2026-12-19", "date_disp": "19/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945087, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "9/*/*", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945088, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "10/*/3", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945089, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "11/*/2", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945090, "taluk": "ಮಂಡ್ಯ", "hobli": "ಕೆರಗೋಡು -1", "village": "ನಲ್ಲಹಳ್ಳಿ", "crop": "ಕಬ್ಬು", "syno": "12/*/1A2", "date": "2026-12-14", "date_disp": "14/12/2026", "pw": "VARSHITHA", "phone": "9148681161", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945132, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 1", "village": "ದುದ್ದ", "crop": "ಅವರೆ", "syno": "192/*/4", "date": "2026-12-11", "date_disp": "11/12/2026", "pw": "SADASHIVAMURTHY", "phone": "9986461332", "dept": "RDPR", "desig": "Secretory/PDO"}, {"sup": "ASO", "id": 6945163, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಕಿರಗಂದೂರು", "crop": "ಕಬ್ಬು", "syno": "28/*/3", "date": "2026-12-24", "date_disp": "24/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945164, "taluk": "ಮಂಡ್ಯ", "hobli": "ದುದ್ದ - 2", "village": "ಕಿರಗಂದೂರು", "crop": "ಕಬ್ಬು", "syno": "29/*/6", "date": "2026-12-24", "date_disp": "24/12/2026", "pw": "MANUJA H S", "phone": "9480884426", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945171, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ಚಾಕನಹಳ್ಳಿ", "crop": "ರಾಗಿ", "syno": "111/*/*", "date": "2027-01-20", "date_disp": "20/01/2027", "pw": "GAYITHRI M", "phone": "7022195735", "dept": "Revenue Department", "desig": "VAO"}, {"sup": "ASO", "id": 6945201, "taluk": "ಮಂಡ್ಯ", "hobli": "ಬಸರಾಳು - 1", "village": "ತಿರುಮಲಾಪುರ", "crop": "ಹುರುಳಿ", "syno": "12/*/16", "date": "2026-12-28", "date_disp": "28/12/2026", "pw": "RENUKA H M", "phone": "8310391023", "dept": "Agriculture Department", "desig": "AAO1"}];
-let activeTab = 'upcoming';
+let activeTab = 'today';
 
+// Reference Date is strictly fixed to Today
 function getTodayISO() {
   const now = new Date();
   const yyyy = now.getFullYear();
@@ -454,18 +452,13 @@ function getTodayISO() {
 
 const TODAY_ISO = getTodayISO();
 
-function formatDispDate(iso) {
-  const [y, m, d] = iso.split('-');
-  return `${d}/${m}/${y}`;
-}
-
-function onDateChange() {
-  const el = document.getElementById('refDate');
-  if (!el.value || el.value < TODAY_ISO) {
-    el.value = TODAY_ISO;
-    showToast('Previous dates are disabled. Reset to Today.');
-  }
-  render();
+function addDaysDisp(baseISO, offsetDays) {
+  const d = new Date(baseISO + 'T00:00:00');
+  d.setDate(d.getDate() + offsetDays);
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yyyy = d.getFullYear();
+  return `${dd}/${mm}/${yyyy}`;
 }
 
 function showToast(msg) {
@@ -483,193 +476,81 @@ function populateTaluks() {
   if (taluks.includes(current)) sel.value = current;
 }
 
-function daysDiff(dateStr, refStr) {
+function daysDiffFromToday(dateStr) {
   if (!dateStr) return null;
   const d1 = new Date(dateStr + 'T00:00:00');
-  const d2 = new Date(refStr + 'T00:00:00');
+  const d2 = new Date(TODAY_ISO + 'T00:00:00');
   return Math.round((d1 - d2) / 86400000);
 }
 
-function getBadge(diff, win) {
+function getBadge(diff) {
   if (diff === null) return '<span class="badge b-future">NO DATE</span>';
   if (diff === 0) return '<span class="badge b-today">TODAY</span>';
   if (diff === 1) return '<span class="badge b-tomorrow">TOMORROW</span>';
-  if (diff >= 2 && diff < win) return `<span class="badge b-day3">IN ${diff} DAYS</span>`;
-  if (diff >= win) return `<span class="badge b-future">IN ${diff}d</span>`;
+  if (diff >= 2 && diff <= 7) return `<span class="badge b-upcoming">IN ${diff} DAYS</span>`;
+  if (diff > 7) return `<span class="badge b-future">IN ${diff}d</span>`;
   return `<span class="badge b-overdue">${Math.abs(diff)}d OVERDUE</span>`;
 }
 
-function switchTab(t) {
-  activeTab = t;
-  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + t).classList.add('active');
-  document.getElementById('windowGroup').style.opacity = (t === 'upcoming') ? '1' : '0.5';
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.pill').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.pill[data-tab="${tab}"]`).classList.add('active');
   render();
 }
 
-function getFilteredData() {
-  const tlk = document.getElementById('filterTaluk').value;
+function getBaseFiltered() {
   const sup = document.getElementById('filterSup').value;
-  return DATA.filter(d => (tlk === 'ALL' || d.taluk === tlk) && (sup === 'ALL' || d.sup === sup));
+  const tlk = document.getElementById('filterTaluk').value;
+  return DATA.filter(d => (sup === 'ALL' || d.sup === sup) && (tlk === 'ALL' || d.taluk === tlk));
 }
 
-function buildGroupBlock(title, subtitle, items, win, mode) {
-  const showSup = (mode !== 'supervisor');
-  const showTaluk = (mode === 'supervisor');
-
-  // Mobile cards
-  const mobileHtml = items.map(r => `
-    <div class="exp-item">
-      <div class="exp-top">
-        <div class="exp-left">
-          ${getBadge(r.diff, win)}
-          <span class="exp-date">${r.date_disp}</span>
-          ${showSup ? `<span class="badge b-sup">${r.sup}</span>` : ''}
-        </div>
-        <span class="exp-id">#${r.id}</span>
-      </div>
-      <div class="exp-mid">
-        <strong>${r.village}</strong> · ${r.crop}
-      </div>
-      <div class="exp-meta">
-        ${showTaluk ? `${r.taluk} · ` : ''}${r.hobli} · Sy: ${r.syno}
-      </div>
-      <div class="exp-bottom">
-        <span class="pw-name">${r.pw}</span>
-        ${r.phone ? `<a class="call-btn" href="tel:${r.phone}">Call ${r.phone}</a>` : ''}
-      </div>
-    </div>
-  `).join('');
-
-  // Desktop table
-  const tableHtml = `
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Alert</th>
-          <th>Harvest Date</th>
-          ${showSup ? '<th>Supervisor</th>' : ''}
-          <th>Exp ID</th>
-          ${showTaluk ? '<th>Taluk</th>' : ''}
-          <th>Hobli / GP</th>
-          <th>Village</th>
-          <th>Crop</th>
-          <th>Survey No</th>
-          <th>PW Name</th>
-          <th>PW Phone</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${items.map((r, i) => `
-          <tr>
-            <td>${i + 1}</td>
-            <td>${getBadge(r.diff, win)}</td>
-            <td><strong>${r.date_disp}</strong></td>
-            ${showSup ? `<td><span class="badge b-sup">${r.sup}</span></td>` : ''}
-            <td>${r.id}</td>
-            ${showTaluk ? `<td>${r.taluk}</td>` : ''}
-            <td>${r.hobli}</td>
-            <td>${r.village}</td>
-            <td>${r.crop}</td>
-            <td>${r.syno}</td>
-            <td>${r.pw}</td>
-            <td><a class="phone-link" href="tel:${r.phone}">${r.phone}</a></td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-
-  return `
-    <div class="group-card">
-      <div class="group-hdr">
-        <h3>${title}</h3>
-        <span class="group-sub">${subtitle}</span>
-      </div>
-      <div class="mobile-list">${mobileHtml}</div>
-      <div class="desktop-table">${tableHtml}</div>
-    </div>
-  `;
+function getTabItems(withDiff, tab) {
+  if (tab === 'today') return withDiff.filter(x => x.diff === 0);
+  if (tab === 'next3') return withDiff.filter(x => x.diff !== null && x.diff >= 1 && x.diff <= 3);
+  if (tab === 'next7') return withDiff.filter(x => x.diff !== null && x.diff >= 1 && x.diff <= 7);
+  if (tab === 'overdue') return withDiff.filter(x => x.diff !== null && x.diff < 0);
+  return withDiff;
 }
 
 function render() {
-  const refEl = document.getElementById('refDate');
-  if (!refEl.value || refEl.value < TODAY_ISO) refEl.value = TODAY_ISO;
-  const ref = refEl.value;
-  const win = parseInt(document.getElementById('windowDays').value, 10);
-  const filtered = getFilteredData();
+  const base = getBaseFiltered();
+  const withDiff = base.map(d => ({...d, diff: daysDiffFromToday(d.date)}));
+  withDiff.sort((a, b) => (a.diff ?? 9999) - (b.diff ?? 9999) || a.taluk.localeCompare(b.taluk) || a.id - b.id);
 
-  let cToday = 0, cTom = 0, cOver = 0;
-  const upcoming = [], overdue = [], withDiff = [];
+  const listToday = getTabItems(withDiff, 'today');
+  const listNext3 = getTabItems(withDiff, 'next3');
+  const listNext7 = getTabItems(withDiff, 'next7');
+  const listOverdue = getTabItems(withDiff, 'overdue');
 
-  filtered.forEach(d => {
-    const diff = daysDiff(d.date, ref);
-    const item = {...d, diff};
-    withDiff.push(item);
-    if (diff === null) return;
-    if (diff === 0) cToday++;
-    else if (diff === 1) cTom++;
-    if (diff >= 0 && diff < win) upcoming.push(item);
-    if (diff < 0) { cOver++; overdue.push(item); }
-  });
+  document.getElementById('cnt-today').textContent = listToday.length;
+  document.getElementById('cnt-next3').textContent = listNext3.length;
+  document.getElementById('cnt-next7').textContent = listNext7.length;
+  document.getElementById('cnt-overdue').textContent = listOverdue.length;
+  document.getElementById('cnt-all').textContent = withDiff.length;
 
-  upcoming.sort((a, b) => a.diff - b.diff || a.taluk.localeCompare(b.taluk) || a.id - b.id);
-  overdue.sort((a, b) => a.diff - b.diff || a.taluk.localeCompare(b.taluk));
-  withDiff.sort((a, b) => (a.diff ?? 9999) - (b.diff ?? 9999) || a.taluk.localeCompare(b.taluk));
+  const hints = {
+    today: `Showing harvests scheduled for Today (${addDaysDisp(TODAY_ISO, 0)})`,
+    next3: `Showing harvests for Next 3 Days leaving today (${addDaysDisp(TODAY_ISO, 1)} to ${addDaysDisp(TODAY_ISO, 3)})`,
+    next7: `Showing harvests for Next 7 Days leaving today (${addDaysDisp(TODAY_ISO, 1)} to ${addDaysDisp(TODAY_ISO, 7)})`,
+    overdue: `Showing past harvest dates before ${addDaysDisp(TODAY_ISO, 0)}`,
+    all: `Showing all pending supervision experiments (${withDiff.length})`
+  };
+  document.getElementById('viewHint').textContent = hints[activeTab];
 
-  document.getElementById('tab-upcoming').textContent = `Upcoming (${upcoming.length})`;
-  document.getElementById('tab-supervisor').textContent = `Supervisor-wise (${filtered.length})`;
-  document.getElementById('tab-overdue').textContent = `Overdue (${overdue.length})`;
-  document.getElementById('tab-all').textContent = `All Pending (${filtered.length})`;
-
-  document.getElementById('kpiGrid').innerHTML = `
-    <div class="kpi today"><div class="lbl">Today</div><div class="val">${cToday}</div></div>
-    <div class="kpi tomorrow"><div class="lbl">Tomorrow</div><div class="val">${cTom}</div></div>
-    <div class="kpi window"><div class="lbl">Next ${win} Days</div><div class="val">${upcoming.length}</div></div>
-    <div class="kpi overdue"><div class="lbl">Past Overdue</div><div class="val">${cOver}</div></div>
-  `;
-
+  const items = getTabItems(withDiff, activeTab);
   const area = document.getElementById('contentArea');
 
-  if (activeTab === 'supervisor') {
-    if (withDiff.length === 0) {
-      area.innerHTML = `<div class="empty">No pending experiments match your filters.</div>`;
-      return;
-    }
-    const order = ['DSO', 'AD', 'SI', 'ASO'];
-    const grouped = {};
-    withDiff.forEach(item => {
-      if (!grouped[item.sup]) grouped[item.sup] = [];
-      grouped[item.sup].push(item);
-    });
-
-    let html = '';
-    order.forEach(sup => {
-      const items = grouped[sup];
-      if (!items || items.length === 0) return;
-      const uCnt = items.filter(x => x.diff !== null && x.diff >= 0 && x.diff < win).length;
-      const oCnt = items.filter(x => x.diff !== null && x.diff < 0).length;
-      html += buildGroupBlock(
-        `${sup} (${items.length} Pending)`,
-        `Next ${win}d: ${uCnt} · Overdue: ${oCnt}`,
-        items,
-        win,
-        'supervisor'
-      );
-    });
-    area.innerHTML = html;
+  if (items.length === 0) {
+    area.innerHTML = `<div class="empty">No pending supervision experiments found for this selection.</div>`;
     return;
   }
 
-  const list = activeTab === 'upcoming' ? upcoming : (activeTab === 'overdue' ? overdue : withDiff);
-  if (list.length === 0) {
-    area.innerHTML = `<div class="empty">No supervision experiments found for this view.</div>`;
-    return;
-  }
+  const showSupCol = (document.getElementById('filterSup').value === 'ALL');
 
+  // Group by Taluk
   const grouped = {};
-  list.forEach(item => {
+  items.forEach(item => {
     const key = item.taluk || 'Unknown';
     if (!grouped[key]) grouped[key] = [];
     grouped[key].push(item);
@@ -677,25 +558,83 @@ function render() {
 
   let html = '';
   Object.keys(grouped).sort().forEach(tlk => {
-    const items = grouped[tlk];
+    const grp = grouped[tlk];
     const supCounts = {};
-    items.forEach(x => supCounts[x.sup] = (supCounts[x.sup] || 0) + 1);
+    grp.forEach(x => supCounts[x.sup] = (supCounts[x.sup] || 0) + 1);
     const sub = Object.entries(supCounts).map(([k, v]) => `${k}: ${v}`).join(' · ');
-    html += buildGroupBlock(`${tlk} (${items.length})`, sub, items, win, 'taluk');
+
+    const mobileCards = grp.map(r => `
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-left">
+            ${getBadge(r.diff)}
+            <span class="exp-date">${r.date_disp}</span>
+            ${showSupCol ? `<span class="badge b-sup">${r.sup}</span>` : ''}
+          </div>
+          <span class="exp-id">#${r.id}</span>
+        </div>
+        <div class="exp-mid"><strong>${r.village}</strong> · ${r.crop}</div>
+        <div class="exp-meta">${r.hobli} · Sy: ${r.syno}</div>
+        <div class="exp-bottom">
+          <span class="pw-name">${r.pw}</span>
+          ${r.phone ? `<a class="call-btn" href="tel:${r.phone}">Call ${r.phone}</a>` : ''}
+        </div>
+      </div>
+    `).join('');
+
+    const tableRows = grp.map((r, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${getBadge(r.diff)}</td>
+        <td><strong>${r.date_disp}</strong></td>
+        ${showSupCol ? `<td><span class="badge b-sup">${r.sup}</span></td>` : ''}
+        <td>${r.id}</td>
+        <td>${r.hobli}</td>
+        <td>${r.village}</td>
+        <td>${r.crop}</td>
+        <td>${r.syno}</td>
+        <td>${r.pw}</td>
+        <td><a class="phone-link" href="tel:${r.phone}">${r.phone}</a></td>
+      </tr>
+    `).join('');
+
+    html += `
+      <div class="group-card">
+        <div class="group-hdr">
+          <h3>${tlk} (${grp.length})</h3>
+          <span class="group-sub">${sub}</span>
+        </div>
+        <div class="mobile-list">${mobileCards}</div>
+        <div class="desktop-table">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Alert</th>
+                <th>Harvest Date</th>
+                ${showSupCol ? '<th>Supervisor</th>' : ''}
+                <th>Exp ID</th>
+                <th>Hobli / GP</th>
+                <th>Village</th>
+                <th>Crop</th>
+                <th>Survey No</th>
+                <th>PW Name</th>
+                <th>PW Phone</th>
+              </tr>
+            </thead>
+            <tbody>${tableRows}</tbody>
+          </table>
+        </div>
+      </div>
+    `;
   });
+
   area.innerHTML = html;
 }
 
-function exportAlertCSV() {
-  const ref = document.getElementById('refDate').value;
-  const win = parseInt(document.getElementById('windowDays').value, 10);
-  const filtered = getFilteredData();
-  const rows = filtered.filter(d => {
-    const diff = daysDiff(d.date, ref);
-    if (activeTab === 'upcoming') return diff !== null && diff >= 0 && diff < win;
-    if (activeTab === 'overdue') return diff !== null && diff < 0;
-    return true;
-  });
+function exportCSV() {
+  const base = getBaseFiltered().map(d => ({...d, diff: daysDiffFromToday(d.date)}));
+  const rows = getTabItems(base, activeTab);
   if (rows.length === 0) { showToast('No rows to export.'); return; }
   const headers = ['Taluk','Supervisor','Experiment ID','Harvest Date','Hobli/GP','Village','Crop','Survey No','PW Name','PW Phone','Department','Designation'];
   const csv = [headers.join(',')].concat(rows.map(r =>
@@ -705,7 +644,7 @@ function exportAlertCSV() {
   const blob = new Blob(["\uFEFF" + csv], {type: 'text/csv;charset=utf-8;'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `Mandya_Supervision_${activeTab}_${ref}.csv`;
+  a.download = `Mandya_Supervision_${activeTab}_${TODAY_ISO}.csv`;
   a.click();
 }
 
@@ -794,15 +733,10 @@ function handleExcelUpload(e) {
   reader.readAsArrayBuffer(file);
 }
 
-// Initialize Today (auto-set and lock past dates)
-(function init() {
-  const refEl = document.getElementById('refDate');
-  refEl.value = TODAY_ISO;
-  refEl.min = TODAY_ISO;
-  document.getElementById('todayBadge').textContent = `Today: ${formatDispDate(TODAY_ISO)}`;
-  populateTaluks();
-  render();
-})();
+// Initialize with Today fixed
+document.getElementById('todayBadge').textContent = `Today: ${addDaysDisp(TODAY_ISO, 0)}`;
+populateTaluks();
+render();
 </script>
 </body>
 </html>
