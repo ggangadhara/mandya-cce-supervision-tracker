@@ -1,6 +1,6 @@
 
-HTML 
-index-v9
+HTML icon
+index-v11
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,6 +122,20 @@ index-v9
     white-space: nowrap;
   }
   .upload-btn:active { opacity: 0.85; }
+  .upload-card.loaded {
+    background: var(--green-bg);
+    border: 1.5px solid var(--green);
+  }
+  .upload-card.loaded h2,
+  .upload-card.loaded p {
+    color: var(--green);
+  }
+  .upload-card.loaded p {
+    font-weight: 700;
+  }
+  .upload-card.loaded .upload-btn {
+    background: var(--green);
+  }
   #excelUpload { display: none; }
 
   /* Supervisor Selection (First) + Taluk Filter */
@@ -168,14 +182,6 @@ index-v9
   }
 
   /* Alert Pills (Wrapped cleanly so zero screen overflow) */
-  .pills-label {
-    font-size: 0.74rem;
-    font-weight: 800;
-    color: var(--navy);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
   .pills {
     display: flex;
     flex-wrap: wrap;
@@ -469,9 +475,9 @@ index-v9
 </header>
 
 <!-- 1. UPLOAD LATEST FORM 2 PENDING LIST -->
-<section class="upload-card no-print">
+<section class="upload-card no-print" id="uploadCard">
   <div class="upload-info">
-    <h2>Upload latest Form 2 pending list</h2>
+    <h2 id="uploadTitle">Upload latest Form 2 pending list</h2>
     <p id="dataSourceLabel" style="display:none;"></p>
   </div>
   <label for="excelUpload" class="upload-btn">Upload Excel (.xlsx)</label>
@@ -499,7 +505,6 @@ index-v9
 </div>
 
 <!-- 3. ALERT PILLS -->
-<div class="pills-label no-print">Harvesting</div>
 <div class="pills no-print">
   <button class="pill active" data-tab="today" onclick="switchTab('today')">
     Today <span class="cnt" id="cnt-today">0</span>
@@ -527,7 +532,7 @@ index-v9
 </div>
 
 <footer>
-  Designed and developed by Gangadhar, Statistical Inspector, Malavalli Taluk Office, Mandya
+  Designed and developed by Gangadhar, Statistical Inspector, Taluk Office Malavalli, Mandya
 </footer>
 
 </div>
@@ -756,7 +761,7 @@ function render() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Alert</th>
+                <th>Harvesting</th>
                 <th>Harvest Date</th>
                 ${showSupCol ? '<th>Supervisor</th>' : ''}
                 <th>Exp ID</th>
@@ -871,8 +876,10 @@ function handleExcelUpload(e) {
         }
       }
       DATA = Array.from(mapMatched.values());
+      document.getElementById('uploadCard').classList.add('loaded');
+      document.getElementById('uploadTitle').textContent = 'Loaded new Excel';
       const lbl = document.getElementById('dataSourceLabel');
-      lbl.textContent = `Loaded: ${file.name} (${DATA.length} Pending)`;
+      lbl.textContent = `${file.name} (${DATA.length} Pending)`;
       lbl.style.display = 'block';
       populateTaluks();
       render();
