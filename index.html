@@ -1,10 +1,12 @@
 
+HTML icon
+index-v13
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Mandya CCE Supervision Tracker</title>
+<title>Mandya DSO CCE Supervision Tracker</title>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 <style>
   :root {
@@ -468,7 +470,7 @@
 <div class="app-shell">
 
 <header>
-  <h1>Mandya CCE Supervision Tracker</h1>
+  <h1>Mandya DSO CCE Supervision Tracker</h1>
   <span class="today-pill" id="todayBadge"></span>
 </header>
 
@@ -874,23 +876,68 @@ function handleExcelUpload(e) {
         }
       }
       DATA = Array.from(mapMatched.values());
-      document.getElementById('uploadCard').classList.add('loaded');
-      document.getElementById('uploadTitle').textContent = 'Loaded new Excel';
-      const lbl = document.getElementById('dataSourceLabel');
-      lbl.textContent = `${file.name} (${DATA.length} Pending)`;
-      lbl.style.display = 'block';
+      const savedAt = saveUploadedData(DATA, file.name);
+      applyLoadedUI(file.name, DATA.length, savedAt);
       populateTaluks();
       render();
-      showToast(`Updated: ${DATA.length} pending experiments matched.`);
+      showToast(`Saved: ${DATA.length} pending experiments matched.`);
     } catch (err) {
       alert('Error reading Excel file: ' + err.message);
     }
   };
   reader.readAsArrayBuffer(file);
+  e.target.value = "";
 }
 
-// Initialize with Today fixed
+const STORAGE_KEY = 'mandya_dso_cce_pending_data_v1';
+
+function applyLoadedUI(fileName, count, savedAt) {
+  document.getElementById('uploadCard').classList.add('loaded');
+  document.getElementById('uploadTitle').textContent = 'Loaded new Excel';
+  const lbl = document.getElementById('dataSourceLabel');
+  lbl.textContent = savedAt
+    ? `${fileName} (${count} Pending) · Saved ${savedAt}`
+    : `${fileName} (${count} Pending)`;
+  lbl.style.display = 'block';
+}
+
+function saveUploadedData(dataArr, fileName) {
+  const now = new Date();
+  const dd = String(now.getDate()).padStart(2, '0');
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const yyyy = now.getFullYear();
+  const hh = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const savedAt = `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      fileName: fileName,
+      savedAt: savedAt,
+      data: dataArr
+    }));
+  } catch (err) {
+    console.warn('Could not save to localStorage:', err);
+  }
+  return savedAt;
+}
+
+function loadSavedDataIfAny() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (parsed && Array.isArray(parsed.data)) {
+      DATA = parsed.data;
+      applyLoadedUI(parsed.fileName || 'Uploaded Excel', DATA.length, parsed.savedAt || '');
+    }
+  } catch (err) {
+    console.warn('Could not restore saved data:', err);
+  }
+}
+
+// Initialize with Today fixed & restore last uploaded Excel if saved
 document.getElementById('todayBadge').textContent = `Today: ${addDaysDisp(TODAY_ISO, 0)}`;
+loadSavedDataIfAny();
 populateTaluks();
 render();
 </script>
