@@ -1,4 +1,3 @@
-v13
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,6 +119,17 @@ v13
     white-space: nowrap;
   }
   .upload-btn:active { opacity: 0.85; }
+  .upload-card.syncing {
+    background: var(--amber-bg);
+    border: 1.5px solid var(--amber);
+  }
+  .upload-card.syncing h2,
+  .upload-card.syncing p {
+    color: var(--amber);
+  }
+  .upload-card.syncing .upload-btn {
+    background: var(--amber);
+  }
   .upload-card.loaded {
     background: var(--green-bg);
     border: 1.5px solid var(--green);
@@ -537,6 +547,12 @@ v13
 <div class="toast" id="toast"></div>
 
 <script>
+// =========================================================================
+// PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW (inside the quotes)
+// Example: const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+// =========================================================================
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxWWMjOAX0ZUZCNePJxBBYroc9kyb6VEq2oRUkWiQYL0CglRFwKadsUtxTdlf0wiXf1-A/exec";
+
 const TALUK_SI_MOBILE = {
   "ಕೃಷ್ಣರಾಜಪೇಟೆ": "9611070519",
   "ಮಂಡ್ಯ": "9743512256",
@@ -874,11 +890,15 @@ function handleExcelUpload(e) {
         }
       }
       DATA = Array.from(mapMatched.values());
-      const savedAt = saveUploadedData(DATA, file.name);
-      applyLoadedUI(file.name, DATA.length, savedAt);
+      const savedAt = saveLocalCache(DATA, file.name);
       populateTaluks();
       render();
-      showToast(`Saved: ${DATA.length} pending experiments matched.`);
+      if (GAS_WEB_APP_URL) {
+        saveOnlineToGoogleSheet(DATA, file.name);
+      } else {
+        applyLoadedUI('Loaded new Excel', file.name, DATA.length, savedAt);
+        showToast(`Loaded locally: ${DATA.length} pending experiments.`);
+      }
     } catch (err) {
       alert('Error reading Excel file: ' + err.message);
     }
@@ -889,24 +909,40 @@ function handleExcelUpload(e) {
 
 const STORAGE_KEY = 'mandya_dso_cce_pending_data_v1';
 
-function applyLoadedUI(fileName, count, savedAt) {
-  document.getElementById('uploadCard').classList.add('loaded');
-  document.getElementById('uploadTitle').textContent = 'Loaded new Excel';
+function setSyncingUI(titleText, subText) {
+  const card = document.getElementById('uploadCard');
+  card.classList.remove('loaded');
+  card.classList.add('syncing');
+  document.getElementById('uploadTitle').textContent = titleText;
+  const lbl = document.getElementById('dataSourceLabel');
+  lbl.textContent = subText;
+  lbl.style.display = 'block';
+}
+
+function applyLoadedUI(titleText, fileName, count, savedAt) {
+  const card = document.getElementById('uploadCard');
+  card.classList.remove('syncing');
+  card.classList.add('loaded');
+  document.getElementById('uploadTitle').textContent = titleText;
   const lbl = document.getElementById('dataSourceLabel');
   lbl.textContent = savedAt
-    ? `${fileName} (${count} Pending) · Saved ${savedAt}`
+    ? `${fileName} (${count} Pending) · ${savedAt}`
     : `${fileName} (${count} Pending)`;
   lbl.style.display = 'block';
 }
 
-function saveUploadedData(dataArr, fileName) {
+function formatNowIST() {
   const now = new Date();
   const dd = String(now.getDate()).padStart(2, '0');
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const yyyy = now.getFullYear();
   const hh = String(now.getHours()).padStart(2, '0');
   const min = String(now.getMinutes()).padStart(2, '0');
-  const savedAt = `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+  return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+}
+
+function saveLocalCache(dataArr, fileName, savedAtOverride) {
+  const savedAt = savedAtOverride || formatNowIST();
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
       fileName: fileName,
@@ -919,25 +955,67 @@ function saveUploadedData(dataArr, fileName) {
   return savedAt;
 }
 
-function loadSavedDataIfAny() {
+function loadLocalCache() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
     const parsed = JSON.parse(raw);
     if (parsed && Array.isArray(parsed.data)) {
       DATA = parsed.data;
-      applyLoadedUI(parsed.fileName || 'Uploaded Excel', DATA.length, parsed.savedAt || '');
+      applyLoadedUI('Loaded new Excel', parsed.fileName || 'Uploaded Excel', DATA.length, parsed.savedAt || '');
     }
   } catch (err) {
     console.warn('Could not restore saved data:', err);
   }
 }
 
-// Initialize with Today fixed & restore last uploaded Excel if saved
+async function saveOnlineToGoogleSheet(dataArr, fileName) {
+  setSyncingUI('Saving to Google Sheet...', `${fileName} (${dataArr.length} Pending)`);
+  try {
+    const resp = await fetch(GAS_WEB_APP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ fileName: fileName, data: dataArr })
+    });
+    const res = await resp.json();
+    if (res && res.status === 'ok') {
+      const savedAt = res.savedAt || formatNowIST();
+      saveLocalCache(dataArr, fileName, savedAt);
+      applyLoadedUI('Loaded new Excel (Saved Online)', fileName, dataArr.length, savedAt);
+      showToast(`Saved online to Google Sheet (${dataArr.length} pending).`);
+    } else {
+      throw new Error((res && res.message) || 'Unknown error from Google Sheet');
+    }
+  } catch (err) {
+    console.error('Online save failed:', err);
+    applyLoadedUI('Loaded new Excel (Saved Locally)', fileName, dataArr.length, formatNowIST());
+    showToast('Saved locally. Online sync failed — check Sheet URL.');
+  }
+}
+
+async function loadOnlineFromGoogleSheet() {
+  if (!GAS_WEB_APP_URL) return;
+  try {
+    const resp = await fetch(GAS_WEB_APP_URL + '?t=' + Date.now());
+    const res = await resp.json();
+    if (res && res.status === 'ok' && Array.isArray(res.data) && res.data.length > 0) {
+      DATA = res.data;
+      saveLocalCache(DATA, res.fileName || 'Latest Form 2 List', res.savedAt || '');
+      applyLoadedUI('Loaded new Excel (Online)', res.fileName || 'Latest Form 2 List', DATA.length, res.savedAt || '');
+      populateTaluks();
+      render();
+    }
+  } catch (err) {
+    console.warn('Could not fetch latest online data:', err);
+  }
+}
+
+// Initialize with Today fixed, load local cache immediately, then sync latest from Google Sheet
 document.getElementById('todayBadge').textContent = `Today: ${addDaysDisp(TODAY_ISO, 0)}`;
-loadSavedDataIfAny();
+loadLocalCache();
 populateTaluks();
 render();
+loadOnlineFromGoogleSheet();
 </script>
 </body>
 </html>
