@@ -1,4 +1,6 @@
 
+
+
 HTML icon
 index
 <!DOCTYPE html>
@@ -178,24 +180,6 @@ index
   }
   .upload-btn:hover { background: var(--navy-light); box-shadow: var(--shadow-sm); }
   .upload-btn:active { transform: scale(0.98); }
-  .reset-btn {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    color: var(--red);
-    border: 1.5px solid var(--red-border);
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    min-height: 40px;
-    white-space: nowrap;
-    transition: background-color 0.15s ease;
-  }
-  .reset-btn:hover { background: var(--red-bg); }
-  .reset-btn.visible { display: inline-flex; }
   .upload-card.syncing { background: var(--amber-bg); border: 1.5px solid var(--amber); }
   .upload-card.syncing h2, .upload-card.syncing p { color: var(--amber); }
   .upload-card.syncing .upload-btn { background: var(--amber); }
@@ -251,12 +235,6 @@ index
     gap: 10px;
     margin-bottom: 12px;
     width: 100%;
-  }
-  @media (min-width: 768px) {
-    .selector-bar { grid-template-columns: 1fr 1fr 1.4fr; }
-  }
-  @media (max-width: 767px) {
-    .selector-bar .sel-search { grid-column: 1 / -1; }
   }
   @media (max-width: 359px) { .selector-bar { grid-template-columns: minmax(0, 1fr); } }
   .sel-group { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
@@ -432,7 +410,6 @@ index
   td.num, th.num { text-align: right; }
   tbody tr:nth-child(even) td { background: var(--surface); }
   tbody tr:hover td { background: var(--surface-hover); }
-  tbody tr.clickable-row { cursor: pointer; }
   tfoot td { background: var(--navy) !important; color: #fff !important; font-weight: 800; }
   .phone-link { color: var(--blue); text-decoration: none; font-weight: 700; }
   .phone-link:hover { text-decoration: underline; }
@@ -502,8 +479,6 @@ index
     background: var(--surface);
     border-bottom: 1px solid var(--border-light);
   }
-  @media (min-width: 768px) { .prog-filters { grid-template-columns: 1fr 1fr 1.6fr; } }
-  @media (max-width: 767px) { .prog-filters input { grid-column: 1 / -1; } }
 
   /* Pagination Bar */
   .load-more-bar {
@@ -609,7 +584,6 @@ index
     <p id="dataSourceLabel" aria-live="polite">Preloaded: As on 26/11/2026 (319 Supervision Pending · 837/2,858 District Completed · 12 F1 Pending in K.R. Pet)</p>
   </div>
   <div class="upload-actions">
-    <button type="button" class="reset-btn" id="resetCacheBtn" onclick="resetToBaseline()" title="Clear cached uploads and restore baseline">Reset</button>
     <label for="excelUpload" class="upload-btn" role="button" tabindex="0">Upload Excel (.xlsx)</label>
     <input type="file" id="excelUpload" accept=".xlsx,.xls" onchange="handleExcelUpload(event)">
   </div>
@@ -641,10 +615,6 @@ index
       <select id="filterTaluk" onchange="renderSupervision()">
         <option value="ALL">All Taluks</option>
       </select>
-    </div>
-    <div class="sel-group sel-search">
-      <label for="supSearch">Quick Search</label>
-      <input type="search" id="supSearch" placeholder="Search Exp ID, Village, Crop, PW..." autocomplete="off">
     </div>
   </div>
 
@@ -691,7 +661,7 @@ index
     <div class="group-hdr">
       <div class="group-hdr-left">
         <h3>Taluk-wise Master Summary (Kharif 2026–27)</h3>
-        <span class="group-sub" id="progSummarySub">Exact 1 to 7 Taluk order · Target Base: 2,858 · Click any taluk row to filter details</span>
+        <span class="group-sub" id="progSummarySub">Exact 1 to 7 Taluk order · Target Base: 2,858</span>
       </div>
       <button type="button" class="btn-sec no-print" onclick="exportProgressExcel()">Export Summary Excel</button>
     </div>
@@ -740,7 +710,6 @@ index
       <select id="progFilterDept" aria-label="Filter by Department" onchange="resetProgLimitAndRender()">
         <option value="ALL">All Departments</option>
       </select>
-      <input type="search" id="progSearch" aria-label="Search completed experiments" placeholder="Search Exp ID, Crop, Village, PW..." autocomplete="off">
     </div>
     <div id="progCompletedArea"></div>
   </div>
@@ -1050,11 +1019,9 @@ function switchSupTab(tab) {
 function getSupBaseFiltered() {
   const sup = document.getElementById('filterSup').value;
   const tlk = document.getElementById('filterTaluk').value;
-  const q = document.getElementById('supSearch').value.toLowerCase().trim();
   return SUP_DATA.filter(d => {
     if (sup !== 'ALL' && d.sup !== sup) return false;
     if (tlk !== 'ALL' && d.taluk !== tlk) return false;
-    if (q && !(d._q && d._q.includes(q))) return false;
     return true;
   });
 }
@@ -1257,17 +1224,6 @@ function resetProgLimitAndRender() {
   renderCompletedList();
 }
 
-function filterByTalukRow(tid) {
-  const sel = document.getElementById('progFilterTaluk');
-  sel.value = String(tid);
-  if (activeProgTab !== 'all' && activeProgTab !== 'f1pend') {
-    switchProgTab('all');
-  } else {
-    resetProgLimitAndRender();
-  }
-  document.getElementById('completedDetailsCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
 function renderProgress() {
   let sPlan = 0, sF1c = 0, sF1p = 0, sHarv = 0, sNoSow = 0, sGap = 0;
   TALUK_STATS.forEach(t => {
@@ -1295,7 +1251,7 @@ function renderProgress() {
     const f2p = Math.max(0, t.f1Comp - f2c - (t.portalGap || 0));
     const pct = ((f2c / t.planned) * 100).toFixed(1);
     return `
-      <tr class="clickable-row" onclick="filterByTalukRow(${t.id})" title="Click to view ${escapeHtml(t.nameEn)} details">
+      <tr>
         <td>${t.id}</td>
         <td><strong>${escapeHtml(t.nameEn)}</strong> <span style="color:var(--muted);font-size:0.78rem;">(${escapeHtml(t.nameKn)})</span></td>
         <td class="num"><strong>${t.planned}</strong></td>
@@ -1417,7 +1373,6 @@ function renderWorkloadChart() {
 function getFilteredProgRows() {
   const tlkVal = document.getElementById('progFilterTaluk').value;
   const deptVal = document.getElementById('progFilterDept').value;
-  const q = document.getElementById('progSearch').value.toLowerCase().trim();
 
   let source;
   if (activeProgTab === 'f1pend') source = F1_PEND_DATA;
@@ -1429,7 +1384,6 @@ function getFilteredProgRows() {
   return source.filter(r => {
     if (tlkVal !== 'ALL' && String(r.tid) !== tlkVal) return false;
     if (deptVal !== 'ALL' && r.dept !== deptVal) return false;
-    if (q && !(r._q && r._q.includes(q))) return false;
     return true;
   });
 }
@@ -1758,7 +1712,6 @@ function applyLoadedUI(titleText, fileName, summaryText, savedAt) {
   document.getElementById('dataSourceLabel').textContent = savedAt
     ? `${fileName} (${summaryText}) · ${savedAt}`
     : `${fileName} (${summaryText})`;
-  document.getElementById('resetCacheBtn').classList.add('visible');
 }
 
 function resetUploadCardVisual() {
@@ -1766,7 +1719,6 @@ function resetUploadCardVisual() {
   card.classList.remove('syncing', 'loaded');
   document.getElementById('uploadTitle').textContent = 'Upload latest Form 2 Pending (or Completed) Excel';
   document.getElementById('dataSourceLabel').textContent = DEFAULT_BANNER_TEXT;
-  document.getElementById('resetCacheBtn').classList.remove('visible');
 }
 
 async function saveLocalCache(fileName, kind, savedAtOverride) {
@@ -1790,24 +1742,6 @@ async function loadLocalCache() {
   indexSearchFields(SUP_DATA);
   indexSearchFields(COMP_DATA);
   applyLoadedUI('Loaded cached Excel', p.fileName || 'Saved Excel', `${SUP_DATA.length} Sup Pending · ${COMP_DATA.length} Completed`, p.savedAt || '');
-}
-
-async function resetToBaseline() {
-  if (!confirm('Clear uploaded/cached Excel data and restore the 26/11/2026 baseline?')) return;
-  await AppStorage.clear(STORAGE_KEY);
-  SUP_DATA = cloneData(BASELINE_SUP_DATA);
-  COMP_DATA = cloneData(BASELINE_COMP_DATA);
-  F1_PEND_DATA = cloneData(BASELINE_F1_PEND);
-  TALUK_STATS = cloneData(TALUK_MASTER);
-  indexSearchFields(SUP_DATA);
-  indexSearchFields(COMP_DATA);
-  indexSearchFields(F1_PEND_DATA);
-  resetUploadCardVisual();
-  populateSupTaluks();
-  populateProgFilters();
-  renderSupervision();
-  renderProgress();
-  showToast('Restored 26/11/2026 preloaded baseline.');
 }
 
 async function saveOnlineToGoogleSheet(dataArr, fileName, totalPend) {
@@ -1888,10 +1822,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   indexSearchFields(SUP_DATA);
   indexSearchFields(COMP_DATA);
   indexSearchFields(F1_PEND_DATA);
-
-  // Debounced search inputs
-  document.getElementById('supSearch').addEventListener('input', debounce(renderSupervision, 150));
-  document.getElementById('progSearch').addEventListener('input', debounce(resetProgLimitAndRender, 150));
 
   // Keyboard support for Upload label
   document.querySelector('.upload-btn').addEventListener('keydown', e => {
